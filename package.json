@@ -12,11 +12,16 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "csurf": "^1.9.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "express-jwt": "^5.1.0",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.9.1",
-    "morgan": "^1.8.1"
+    "morgan": "^1.8.1",
+    "sanitize-html": "^1.14.1",
+    "twilio": "^2.11.1",
+    "underscore": "^1.8.3"
   }
 }
