@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 require("dotenv").config();
 var path = require('path');
 
+// var client = require('twilio')(config.accountSid, config.authToken);
+
+
 // JSON web token dependencies, including a secret key to sign the token
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -20,9 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
-
-// Mount middleware to notify Twilio of errors
-app.use(twilioNotifications.notifyOnError);
 
 // Replace the above routes with the following
 app.use('/api/users', expressJWT({secret: secret}).unless({
@@ -57,6 +57,9 @@ app.post('/api/auth', function(req, res) {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
+
+//Controllers
+app.use('/twilioclient', require('./controllers/twilioClient'));
 
 var server = app.listen(process.env.PORT || 3000);
 
