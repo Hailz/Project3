@@ -5,7 +5,6 @@ angular.module('AppCtrl', ['AppServices'])
         password: ''
     };
     $scope.userSignup = function() {
-        // to implement
         $http.post('/api/users', $scope.user).then(function success(res) {
         $state.go("home");
         }, function error(err) {
@@ -19,12 +18,11 @@ angular.module('AppCtrl', ['AppServices'])
         password: ''
     };
     $scope.userLogin = function() {
-        // to implement
         $http.post("/api/auth", $scope.user).then(function success(res) {
         Auth.saveToken(res.data.token);
         $state.go("home")
         }, function error(err) {
-            console.log("Yo dawg")
+            console.log("Uh oh. Login Failed.")
         })
         }
 }])
@@ -36,7 +34,6 @@ angular.module('AppCtrl', ['AppServices'])
     return Auth.isLoggedIn();
   }
   $scope.logout = function() {
-    // to implement
     console.log("Before Logout", Auth.getToken());
     Auth.removeToken();
     console.log("After Logout", Auth.getToken());

@@ -1,6 +1,8 @@
 require("dotenv").config();
 var accountSid = process.env.TWILIO_ACCOUNT_SID;
 var authToken = process.env.TWILIO_AUTH_TOKEN;
+var User = require('../models/user');
+var Excuses = require('../models/excuses');
 
 var client = require('twilio')(accountSid, authToken);
 
