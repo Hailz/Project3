@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
 
+// Mount middleware to notify Twilio of errors
+app.use(twilioNotifications.notifyOnError);
 
 // Replace the above routes with the following
 app.use('/api/users', expressJWT({secret: secret}).unless({
