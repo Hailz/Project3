@@ -12,13 +12,15 @@ router.route('/')
     client.messages.create({
       to: '+12063840852',
       from: process.env.TWILIO_NUMBER,
-      body: 'essage'
+      body: 'This is a message'
     }, function(err, message) {
-      // if(err) return res.status(500).send(err);
+      if (err) return res.status(500).send(err);
       return res.send(message);
-  
     });
 });
+
+
+
 
 
 //Export 
