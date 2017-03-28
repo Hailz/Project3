@@ -49,13 +49,20 @@ angular.module('AppServices', ['ngResource'])
         }
     }
 }])
-.factory("MessageApi", ["$http", '$location', function($http, $location) {
+.factory("Message", ['$http', function($http) {
     return {
-        sendMessage: function(){
-            return $http.post('/')
+        sendMessage: function() {
+            return $http.post('/twilioClient'); 
         }
-    }
+    } 
 }])
+.factory("UsersAPI", ["$http", function($http) {
+   return {
+       getMessage: function(id) {
+           return $http.get('api/users/' + id)
+       }
+   }
+}]);
 
 
 
@@ -63,4 +70,13 @@ angular.module('AppServices', ['ngResource'])
 
 
 
-;
+
+
+
+
+
+
+
+
+
+

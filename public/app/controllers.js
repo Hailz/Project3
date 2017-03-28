@@ -40,16 +40,14 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
-.controller('MsgCtrl', ['$scope', '$http', function($scope, $http) {
-  $scope.sendMsg = function() {
-    $http.post('/twilioclient/sendmessage').then(function success(res) {
-        console.log("it's working, people")
-    })
-    .error(function(data){
-        console.log("it's not working, people")
-    });
-  }
-
+.controller('MsgCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
+    $scope.sendMsg = function() {
+        console.log('yo');
+        Message.sendMessage().then(function success(res){
+            console.log('Yay ' + res);
+        }, function error(err){
+            console.log('Boooo ' + err);
+        })
 }])
 .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
 
