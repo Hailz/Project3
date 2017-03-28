@@ -40,6 +40,7 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
+<<<<<<< HEAD
 .controller('HomeCtrl', ['$scope', '$location', '$http', 'Auth', 'Message', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, Message, ExcusesAPI, UsersAPI) {
     $scope.excuses = [];
     $scope.searchTerm;
@@ -70,6 +71,18 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Nooo", err)
         })
     }
+=======
+
+.controller('HomeCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
+  $scope.sendMsg = function() {
+    Message.sendMessage().then(function success(res) {
+        console.log("it's working, people " + res)
+    },
+    function error(err){
+        console.log("it's not working, people " + err)
+    })
+  }
+>>>>>>> 6f186813334973b571c3f4f001b8cdbd68dffa87
 }])
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
@@ -136,4 +149,13 @@ angular.module('AppCtrl', ['AppServices'])
     }, function error(err){
         console.log(err)
     })
+}])
+.controller('MsgCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
+   $scope.sendMsg = function() {
+       console.log('yo');
+       Message.sendMessage().then(function success(res){
+           console.log('Yay ' + res);
+       }, function error(err){
+           console.log('Boooo ' + err);
+       })
 }])

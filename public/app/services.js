@@ -54,7 +54,7 @@ angular.module('AppServices', ['ngResource'])
         sendMessage: function(){
             return $http.post('/twilioClient')
         }
-    }
+    } 
 }])
 .factory('ExcusesAPI', ['$http', '$location', function($http, $location){
     return {
@@ -79,9 +79,29 @@ angular.module('AppServices', ['ngResource'])
 
 }])
 .factory("UsersAPI", ["$http", function($http) {
-  return {
-      getMessage: function(id) {
-          return $http.get('api/users/' + id)
-      }
-  }
+   return {
+       getMessage: function(id) {
+           return $http.get('api/users/' + id)
+       }
+   }
+}])
+.factory('ExcusesAPI', ['$http', '$location', function($http, $location){
+    return {
+        getAllExcuses: function() {
+            return $http.get('/api/excuses');
+        }
+        getExcuse: function(id) {
+            return $http.get('/api/excuses/' + id);
+        }
+        updateExcuse: function(rating) {
+            return $http.put('api/excuses/' + excuse._id, rating)
+            .then(function success(res) {
+                return res.data
+            }), function error (err) {
+                return null; 
+            }
+        }   
+    }
 }]);
+
+
