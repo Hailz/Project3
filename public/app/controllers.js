@@ -40,44 +40,44 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
-.controller('MsgCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('MsgCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
   $scope.sendMsg = function() {
-    $http.post('/twilioclient/sendmessage').then(function success(res) {
-        console.log("it's working, people")
+    Message.sendMessage().then(function success(res) {
+        console.log("it's working, people " + res)
+    },
+    function error(err){
+        console.log("it's not working, people " + err)
     })
-    .error(function(data){
-        console.log("it's not working, people")
-    });
   }
 
 }])
-.controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
+// .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
 
-    $scope.temp = Auth.currentUser();
-    var curUser = $scope.temp.id;
+//     $scope.temp = Auth.currentUser();
+//     var curUser = $scope.temp.id;
 
-    UsersAPI.getUser(curUser).then(function(user){
-        var currentUserId = user.data.id,
-        var currentUser = user.data.name;
-        console.log("User val", user.data.name)
+//     UsersAPI.getUser(curUser).then(function(user){
+//         var currentUserId = user.data.id,
+//         var currentUser = user.data.name;
+//         console.log("User val", user.data.name)
 
-        $scope.newComment = {
-            excuseId: '',
-            comment: '',
-            userId: currentUserId,
-            commentAuthor: currentUser
-        }  
-    })
-    $scope.addComment = function() {
-        console.log($scope.newComment)
-        CommentsAPI.createComment($scope.newComment)
-        .then(function success(res) {
-            $location.path('back') //probably won't work. May be able to implement similar concept...more on this later
-        }, function error(err) {
-            console.log("Error with create", err)
-        })
-    };
-}]) 
+//         $scope.newComment = {
+//             excuseId: '',
+//             comment: '',
+//             userId: currentUserId,
+//             commentAuthor: currentUser
+//         }  
+//     })
+//     $scope.addComment = function() {
+//         console.log($scope.newComment)
+//         CommentsAPI.createComment($scope.newComment)
+//         .then(function success(res) {
+//             $location.path('back') //probably won't work. May be able to implement similar concept...more on this later
+//         }, function error(err) {
+//             console.log("Error with create", err)
+//         })
+//     };
+// }]) 
 .controller('ExcusesCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
     $scope.excuses = [];
     $scope.searchTerm;
