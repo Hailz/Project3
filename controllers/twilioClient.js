@@ -3,6 +3,8 @@ var express = require('express');
 var router = express.Router(); 
 var accountSid = process.env.TWILIO_ACCOUNT_SID;
 var authToken = process.env.TWILIO_AUTH_TOKEN;
+var User = require('../models/user');
+var Excuses = require('../models/excuses');
 
 var client = require('twilio')(accountSid, authToken);
 
@@ -10,9 +12,9 @@ router.route('/')
 
 .post(function(req,res){ 
     client.messages.create({
-      to: '+12063840852',
+      to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
-      body: 'This is a message'
+      body: 'This is a test. Zuchini!'
     }, function(err, message) {
       if (err) return res.status(500).send(err);
       return res.send(message);
