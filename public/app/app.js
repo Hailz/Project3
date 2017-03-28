@@ -11,6 +11,7 @@ app.config([
     .state('home', {
         url: '/',
         templateUrl: 'app/views/home.html',
+        controller: 'MsgCtrl'
     })
     .state('signup', {
         url: '/signup',

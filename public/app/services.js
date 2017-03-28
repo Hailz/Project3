@@ -48,4 +48,19 @@ angular.module('AppServices', ['ngResource'])
         return config;
         }
     }
-}]);
+}])
+.factory("MessageApi", ["$http", '$location', function($http, $location) {
+    return {
+        sendMessage: function(){
+            return $http.post('/')
+        }
+    }
+}])
+
+
+
+
+
+
+
+;
