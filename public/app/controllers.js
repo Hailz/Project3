@@ -40,17 +40,38 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
-.controller('HomeCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
-  $scope.sendMsg = function() {
-    Message.sendMessage().then(function success(res) {
-        console.log("it's working, people " + res)
-    },
-    function error(err){
-        console.log("it's not working, people " + err)
-    })
-  }
+.controller('HomeCtrl', ['$scope', '$location', '$http', 'Auth', 'Message', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, Message, ExcusesAPI, UsersAPI) {
+    $scope.excuses = [];
+    $scope.searchTerm;
 
+    $scope.sendMsg = function() {
+        Message.sendMessage().then(function success(res) {
+            console.log("it's working, people " + res)
+        },
+        function error(err){
+            console.log("it's not working, people " + err)
+        })
+    }
+
+    ExcusesAPI.getAllExcuses()
+    .then(function success(res) {
+        console.log(res)
+        // $scope.excuses = res.data;
+    }, function error(err) {
+        console.log("Error", err);
+    })
+
+    $scope.searchExcuses = function() {
+        console.log("here")
+        ExcusesAPI.getAllExcuses($scope.searchTerm).then(function (res) {
+            console.log(res)
+            $scope.excuses = res.config.data;
+        }, function error(err) {
+            console.log("Nooo", err)
+        })
+    }
 }])
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
 
 //     $scope.temp = Auth.currentUser();
@@ -78,28 +99,32 @@ angular.module('AppCtrl', ['AppServices'])
 //         })
 //     };
 // }]) 
-.controller('ExcusesCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
-    $scope.excuses = [];
-    $scope.searchTerm;
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ExcusesAPI.getAllExcuses()
-    .then(function success(res) {
-        console.log(res)
-        $scope.excuses = res.data;
-    }, function error(err) {
-        console.log("Error", err);
-    })
+////////////////////////////////////////////////////////////////////////////////////////////////
+// .controller('ExcusesCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
+//     $scope.excuses = [];
+//     $scope.searchTerm;
 
-    $scope.searchExcuses = function() {
-        console.log("here")
-        ExcusesAPI.getAllExcuses($scope.searchTerm).then(function (res) {
-            console.log(res)
-            $scope.excuses = res.config.data;
-        }, function error(err) {
-            console.log("Nooo", err)
-        })
-    }
-}])
+//     ExcusesAPI.getAllExcuses()
+//     .then(function success(res) {
+//         console.log(res)
+//         $scope.excuses = res.data;
+//     }, function error(err) {
+//         console.log("Error", err);
+//     })
+
+//     $scope.searchExcuses = function() {
+//         console.log("here")
+//         ExcusesAPI.getAllExcuses($scope.searchTerm).then(function (res) {
+//             console.log(res)
+//             $scope.excuses = res.config.data;
+//         }, function error(err) {
+//             console.log("Nooo", err)
+//         })
+//     }
+// }])
+/////////////////////////////////////////////////////////////////////////////////////////////
 .controller('OneExcuseCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, $stateParams){
     $scope.excuse = {};
     $scope.user = Auth.currentUser()
