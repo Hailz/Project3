@@ -137,4 +137,49 @@ angular.module('AppCtrl', ['AppServices'])
         console.log(err)
     })
 }])
+.controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
+
+    $scope.temp = Auth.currentUser();
+    var curUser = $scope.temp.id;
+
+    UsersAPI.getUser(curUser).then(function(user){
+        var currentUserId = user.data.id,
+        var currentUser = user.data.name;
+        console.log("User val", user.data.name)
+
+        $scope.newComment = {
+            excuseId: '',
+            comment: '',
+            userId: currentUserId,
+            commentAuthor: currentUser
+        }  
+    })
+     $scope.addComment = function() {
+        console.log($scope.newComment)
+        CommentsAPI.createComment($scope.newComment)
+        .then(function success(res) {
+            $location.path('back') //probably won't work. May be able to implement similar concept...more on this later
+        }, function error(err) {
+            console.log("Error with create", err)
+        })
+    };
+
+
+
+
+
+
+}])
+
+
+
+
+// .controller('CommentController', function(){
+//     this.comment = {};
+//     this.addComment = function(post){
+//       this.comment.createdOn = Date.now();
+//       post.comments.push(this.comment);
+//       this.comment ={};
+//     };
+//   });
 

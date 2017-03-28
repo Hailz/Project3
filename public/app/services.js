@@ -75,9 +75,23 @@ angular.module('AppServices', ['ngResource'])
     }
 }])
 .factory('CommentsAPI', ['$http', function($http){
-
-
+    var alerts = [];
+return {
+        getAllComments: function() {
+            return $http.get('/api/comments');
+        },
+        createComment: function() {
+            return $http.post('/api/comments/');
+        },
+        deleteComment: function() {
+            return $http.delete('/api/comments/' + id);
+        },
+        updateComment: function() {
+            return $http.put('/api/comments/' + id);
+        }   
+    }
 }])
+
 .factory("UsersAPI", ["$http", function($http) {
    return {
        getMessage: function(id) {
