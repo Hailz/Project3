@@ -86,4 +86,4 @@ angular.module('AppServices', ['ngResource'])
     }
 }]);
 
->>>>>>> 6bae91ea4aedfd92c52c585d6746d415455cea6a
+

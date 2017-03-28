@@ -112,3 +112,12 @@ angular.module('AppCtrl', ['AppServices'])
         console.log(err)
     })
 }])
+.controller('MsgCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
+   $scope.sendMsg = function() {
+       console.log('yo');
+       Message.sendMessage().then(function success(res){
+           console.log('Yay ' + res);
+       }, function error(err){
+           console.log('Boooo ' + err);
+       })
+}])
