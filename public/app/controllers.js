@@ -46,8 +46,9 @@ angular.module('AppCtrl', ['AppServices'])
 
     ExcusesAPI.getAllExcuses()
     .then(function success(res) {
-        console.log(res)
+        console.log('in excuses API then promise', res)
         $scope.excuses = res.data;
+        console.log(res.data);
     }, function error(err) {
         console.log("Error", err);
     })
