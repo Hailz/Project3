@@ -15,12 +15,16 @@ router.route('/')
       to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
 <<<<<<< HEAD
+<<<<<<< HEAD
       body: 'This is a message'
     }, function(err, message) {
       if (err) return res.status(500).send(err);
 =======
       body: 'Zzzzzzzzzuchini!'
 
+=======
+      body: 'Bananananana!'
+>>>>>>> 6bae91ea4aedfd92c52c585d6746d415455cea6a
     }, function(err, message) {
       console.log('Banana')
       if (err) return res.send(500).send(err);

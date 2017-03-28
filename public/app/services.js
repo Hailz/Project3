@@ -56,6 +56,10 @@ angular.module('AppServices', ['ngResource'])
         }
     } 
 }])
+.factory('CommentsAPI', ['$http', function($http){
+    
+    
+}])
 .factory("UsersAPI", ["$http", function($http) {
    return {
        getMessage: function(id) {
@@ -81,6 +85,7 @@ angular.module('AppServices', ['ngResource'])
         }   
     }
 }]);
+<<<<<<< HEAD
 
 
 
@@ -100,3 +105,5 @@ angular.module('AppServices', ['ngResource'])
 
 
 
+=======
+>>>>>>> 6bae91ea4aedfd92c52c585d6746d415455cea6a

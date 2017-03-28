@@ -11,7 +11,7 @@ app.config([
     .state('home', {
         url: '/',
         templateUrl: 'app/views/home.html',
-        controller: 'MsgCtrl'
+        controller: 'HomeCtrl'
     })
     .state('signup', {
         url: '/signup',
@@ -29,7 +29,8 @@ app.config([
     })
     .state('profile',{
         url: '/profile',
-        templateUrl: 'app/views/'
+        templateUrl: 'app/views/profile.html',
+        controller: 'ProfileCtrl'
     });
     $locationProvider.html5Mode(true);
     }])
