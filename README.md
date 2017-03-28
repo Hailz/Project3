@@ -44,4 +44,10 @@
 
 # Approach Taken:
 
+  ## Day 1:
+  We talked through what we wanted our app to do, went over user flow and wire frames, started planning out the neccessary routes and found an API that would allow us to send text messages. We spent a good part of the day wrestling with trying to get Twilio to work for us.
+
+  ## Day 2:
+  The struggle continues. Twilio will only send texts to Joe's phone today. We're looking into why and trying to fix that. We're also building out the routes and HTML for the rest of the app.
+
 # Roadbumps:

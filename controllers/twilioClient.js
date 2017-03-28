@@ -10,19 +10,19 @@ var client = require('twilio')(accountSid, authToken);
 
 router.route('/')
 
-// .post(function(){ 
+.post(function(req, res){ 
     client.messages.create({
-      to: '+14258943750',
+      to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
-      body: 'This is a test. Zuchini!'
+      body: 'Zzzzzzzzzuchini!'
 
-    // }, function() {
-    //   console.log('Banana')
-      // if(err) return res.status(500).send(err);
-      // return res.send(message);
+    }, function(err, message) {
+      console.log('Banana')
+      if (err) return res.send(500).send(err);
+      return res.send(message);
   
     });
-// });
+});
 
 
 //Export 
