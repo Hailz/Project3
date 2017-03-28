@@ -59,7 +59,7 @@ app.get('/*', function(req, res) {
 });
 
 //Controllers
-app.use('/twilioclient', require('./controllers/twilioClient'));
+app.use('/twilioClient', require('./controllers/twilioClient'));
 
 var server = app.listen(process.env.PORT || 3000);
 
