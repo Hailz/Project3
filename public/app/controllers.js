@@ -40,9 +40,17 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
-.controller('HomeCtrl', ['$scope', '$location', '$http', 'Auth', 'Message', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, Message, ExcusesAPI, UsersAPI) {
+.controller('HomeCtrl', ['$scope', '$location', '$http', 'Message', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Message, ExcusesAPI, UsersAPI) {
     $scope.excuses = [];
     $scope.searchTerm;
+
+    ExcusesAPI.getAllExcuses()
+    .then(function success(res) {
+        console.log(res)
+        $scope.excuses = res.data;
+    }, function error(err) {
+        console.log("Error", err);
+    })
 
     $scope.sendMsg = function() {
         Message.sendMessage().then(function success(res) {
@@ -52,14 +60,6 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("it's not working, people " + err)
         })
     }
-
-    ExcusesAPI.getAllExcuses()
-    .then(function success(res) {
-        console.log(res)
-        $scope.excuses = res.data;
-    }, function error(err) {
-        console.log("Error", err);
-    })
 
     $scope.searchExcuses = function() {
         console.log("here")

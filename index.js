@@ -3,8 +3,6 @@ var bodyParser = require('body-parser');
 require("dotenv").config();
 var path = require('path');
 
-// var client = require('twilio')(config.accountSid, config.authToken);
-
 
 // JSON web token dependencies, including a secret key to sign the token
 var expressJWT = require('express-jwt');
@@ -16,7 +14,10 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
-mongoose.connect('mongodb://localhost/AppServices');
+// var Comments = require('./models/comments');
+// var Excuses = require('./models/excuses');
+// var Favorites = require('./models/favorites');
+mongoose.connect('mongodb://localhost/Project3');
 
 // decode POST data in JSON and URL encoded formats
 app.use(bodyParser.json());
@@ -24,10 +25,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
 
-// Replace the above routes with the following
+
 app.use('/api/users', expressJWT({secret: secret}).unless({
     path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
+
+app.use('/api/excuses', require('./controllers/excuses'));
+// app.use('/api/comments', require('./controllers/comments'));
+// app.use('/api/favorites', require('./controllers/favorites'));
 
 // this middleware will check if expressJWT did not authorize the user, and return a message
 app.use(function (err, req, res, next) {
@@ -60,6 +65,7 @@ app.get('/*', function(req, res) {
 
 //Controllers
 app.use('/twilioClient', require('./controllers/twilioClient'));
+
 
 var server = app.listen(process.env.PORT || 3000);
 
