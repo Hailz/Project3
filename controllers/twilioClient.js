@@ -12,9 +12,9 @@ router.route('/')
 
 .post(function(req,res){ 
     client.messages.create({
-      to: '+12063840852',
+      to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
-      body: 'essage'
+      body: 'This is a test. Zuchini!'
     }, function(err, message) {
       // if(err) return res.status(500).send(err);
       return res.send(message);
