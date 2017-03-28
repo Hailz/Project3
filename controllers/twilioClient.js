@@ -14,13 +14,11 @@ router.route('/')
     client.messages.create({
       to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
-      body: 'Zzzzzzzzzuchini!'
-
+      body: 'Bananananana!'
     }, function(err, message) {
       console.log('Banana')
       if (err) return res.send(500).send(err);
       return res.send(message);
-  
     });
 });
 
