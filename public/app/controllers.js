@@ -40,6 +40,7 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
+
 .controller('HomeCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
   $scope.sendMsg = function() {
     Message.sendMessage().then(function success(res) {
@@ -49,7 +50,6 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("it's not working, people " + err)
     })
   }
-
 }])
 // .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'UsersAPI', function($scope, $location, $http, Auth, ExcusesAPI, UsersAPI){
 
