@@ -40,7 +40,7 @@ angular.module('AppCtrl', ['AppServices'])
     $location.path("/login");
   };
 }])
-.controller('MsgCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
+.controller('HomeCtrl', ['$scope', 'Message', 'UsersAPI', function($scope, Message, UsersAPI) {
   $scope.sendMsg = function() {
     Message.sendMessage().then(function success(res) {
         console.log("it's working, people " + res)
