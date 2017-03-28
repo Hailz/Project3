@@ -89,10 +89,10 @@ angular.module('AppServices', ['ngResource'])
     return {
         getAllExcuses: function() {
             return $http.get('/api/excuses');
-        }
+        },
         getExcuse: function(id) {
             return $http.get('/api/excuses/' + id);
-        }
+        },
         updateExcuse: function(rating) {
             return $http.put('api/excuses/' + excuse._id, rating)
             .then(function success(res) {
