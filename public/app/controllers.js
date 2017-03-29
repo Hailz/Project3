@@ -138,4 +138,44 @@ angular.module('AppCtrl', ['AppServices'])
         console.log(err)
     })
 }])
+.controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'CommentsAPI', 'UsersAPI', function($scope, $location, $http, Auth, CommentsAPI, UsersAPI){
+    $scope.comments = [];
+    CommentsAPI.getAllComments()
+    .then(function success(res) {
+        console.log(res);
+        CommentsAPI.createComment()
+        .then(function success(res) {
+            console.log(res)
+        }, function error(err) {
+            console.log("Error", err);
+            })
+        CommentsAPI.deleteComment()
+        .then(function success(res) {
+            console.log(res)
+        }, function error(err) {
+            console.log("Error", err);
+            })
+        CommentsAPI.updateComment()
+        .then(function success(res) {
+            console.log(res)
+        }, function error(err) {
+            console.log("Error", err);
+            })
+    }, function error(err) {
+        console.log("Error", err);
+        }
+    )
+}])
+
+
+
+
+// .controller('CommentController', function(){
+//     this.comment = {};
+//     this.addComment = function(post){
+//       this.comment.createdOn = Date.now();
+//       post.comments.push(this.comment);
+//       this.comment ={};
+//     };
+//   });
 
