@@ -31,7 +31,7 @@ app.use('/api/users', expressJWT({secret: secret}).unless({
 }), require('./controllers/users'));
 
 app.use('/api/excuses', require('./controllers/excuses'));
-// app.use('/api/comments', require('./controllers/comments'));
+app.use('/api/comments', require('./controllers/comments'));
 // app.use('/api/favorites', require('./controllers/favorites'));
 
 // this middleware will check if expressJWT did not authorize the user, and return a message
@@ -65,6 +65,7 @@ app.get('/*', function(req, res) {
 
 //Controllers
 app.use('/twilioClient', require('./controllers/twilioClient'));
+
 
 
 var server = app.listen(process.env.PORT || 3000);

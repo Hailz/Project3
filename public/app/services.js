@@ -81,6 +81,7 @@ return {
             return $http.get('/api/comments');
         },
         createComment: function() {
+            console.log('COMMENT BUTTON WORKING');
             return $http.post('/api/comments/');
         },
         deleteComment: function() {
