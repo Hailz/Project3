@@ -61,6 +61,14 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Error", err);
     })
 
+    $scope.reDraw = function(){
+        console.log('Shuffle click')
+         $scope.temp = $scope.allExcuses.sort(function(){
+            return 0.5 - Math.random()
+        })
+         $scope.excuses = [$scope.temp[0], $scope.temp[1], $scope.temp[2]];
+    }
+
     $scope.tempUser = Auth.currentUser();
     var curUser = $scope.tempUser.id;
     UsersAPI.getUser(curUser).then(function(user){
@@ -120,6 +128,11 @@ angular.module('AppCtrl', ['AppServices'])
     }
     $scope.dislike = function(excuse){
         rating= $scope.excuse.rating--
+        ExcusesAPI.updateExcuse($scope.excuse).then(function success(res){
+        console.log('update it ' + res)
+       }, function error(err){
+        console.log("Faaaaail " + err)
+       })
     }
 
     $scope.comments = [];
