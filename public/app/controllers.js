@@ -106,14 +106,21 @@ angular.module('AppCtrl', ['AppServices'])
 
     ExcusesAPI.getExcuse($stateParams.id)
     .then(function success(res){
-
-        $scope.excuse = res.data;
-        console.log($scope.user); 
-        console.log("~~~~this ish " + res.data)
+        $scope.excuse = res.data
+        console.log("~~~~this ish " + $scope.excuse.rating)
     }, function error(err){
         console.log(err)
     })
-    
+
+    $scope.like = function(excuse){
+        $scope.excuse.rating++
+    }
+    $scope.dislike = function(excuse){
+        $scope.excuse.rating--
+    }
+
+    $scope.comments = [];
+
     CommentsAPI.getAllComments()
     .then(function success(response) {
         $scope.loading = true; 
