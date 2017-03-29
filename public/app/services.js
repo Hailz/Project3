@@ -75,7 +75,6 @@ angular.module('AppServices', ['ngResource'])
     }
 }])
 .factory('CommentsAPI', ['$http', function($http){
-    var alerts = [];
 return {
         getAllComments: function() {
             return $http.get('/api/comments');
@@ -91,7 +90,6 @@ return {
         }   
     }
 }])
-
 .factory("UsersAPI", ["$http", function($http) {
    return {
        getMessage: function(id) {
