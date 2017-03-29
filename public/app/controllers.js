@@ -138,31 +138,50 @@ angular.module('AppCtrl', ['AppServices'])
         console.log(err)
     })
 }])
-.controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'CommentsAPI', 'UsersAPI', function($scope, $location, $http, Auth, CommentsAPI, UsersAPI){
+.controller('CommentCtrl', ['$scope', '$location', '$stateParams', '$http', 'Auth', 'CommentsAPI', 'UsersAPI', function($scope, $location, $stateParams, $http, Auth, CommentsAPI, UsersAPI){
     $scope.comments = [];
+    $scope.currentUserId = user.data.id;
+    $scope.currentUser = user.data.name;
+    $scope.newComment = {
+            excuseId: '',
+            comment: '',
+            commentAuthor: currentUser,
+            userId: currentUserId
+        }  
+    $scope.loading = false; 
+    $scope.temp = Auth.currentUser();
+
     CommentsAPI.getAllComments()
-    .then(function success(res) {
-        console.log(res);
-        CommentsAPI.createComment()
-        .then(function success(res) {
-            console.log(res)
+    .then(function success(response) {
+        $scope.loading = true; 
+        $scope.comments = response.data;
+        $scope.loading = false; 
+        
+        CommentsAPI.createComment($scope.comment)
+        .then(function success(response) {
+            $location.path('/');
         }, function error(err) {
             console.log("Error", err);
             })
-        CommentsAPI.deleteComment()
-        .then(function success(res) {
-            console.log(res)
+        
+        CommentsAPI.deleteComment($stateParams.id)
+        .then(function success(response) {
+            $location.path('/excuse');
         }, function error(err) {
             console.log("Error", err);
             })
-        CommentsAPI.updateComment()
-        .then(function success(res) {
-            console.log(res)
+        
+        CommentsAPI.updateComment($scope.comment)
+        .then(function success(response) {
+            console.log("success", response);
+            $location.path('/comment/' + $scope.comment._id);
         }, function error(err) {
             console.log("Error", err);
             })
+
     }, function error(err) {
         console.log("Error", err);
+        $scope.loading = false; 
         }
     )
 }])
