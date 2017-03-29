@@ -33,7 +33,7 @@ app.config([
         controller: 'ProfileCtrl'
     })
     .state('excuse', {
-        url: '/excuse',
+        url: '/excuse/:id',
         templateUrl: 'app/views/excuse.html',
         controller: 'CommentCtrl'
     });

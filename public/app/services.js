@@ -35,7 +35,7 @@ angular.module('AppServices', ['ngResource'])
         } else {
             return false;
         }
-        }
+    }
     }
 }])
 .factory("AuthInterceptor", ["Auth", function(Auth) {
@@ -51,8 +51,9 @@ angular.module('AppServices', ['ngResource'])
 }])
 .factory("Message", ["$http", function($http) {
     return {
-        sendMessage: function(){
-            return $http.post('/twilioClient')
+        sendMessage: function(message){
+            console.log(message)
+            return $http.post('/twilioClient', [message])
         }
     } 
 }])
@@ -92,7 +93,7 @@ return {
 }])
 .factory("UsersAPI", ["$http", function($http) {
    return {
-       getMessage: function(id) {
+       getUser: function(id) {
            return $http.get('api/users/' + id)
        }
    }
