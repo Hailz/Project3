@@ -31,6 +31,11 @@ app.config([
         url: '/profile',
         templateUrl: 'app/views/profile.html',
         controller: 'ProfileCtrl'
+    })
+    .state('excuse', {
+        url: '/excuse',
+        templateUrl: 'app/views/excuse.html',
+        controller: 'CommentCtrl'
     });
     $locationProvider.html5Mode(true);
     }])
