@@ -84,19 +84,6 @@ angular.module('AppCtrl', ['AppServices'])
         })
     }
 }])
-
-.controller('OneExcuseCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, $stateParams){
-    // $scope.excuse = {};
-    // $scope.user = Auth.currentUser()
-
-    // ExcusesAPI.getExcuse($stateParams.id)
-    // .then(function success(res){
-    // // $scope.excuse = res.data
-    //     console.log(res.data)
-    // }, function error(err){
-    //     console.log(err)
-    // })
-}])
 .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, UsersAPI, $stateParams){
     $scope.excuse = {};
     $scope.user = Auth.currentUser()
@@ -104,10 +91,17 @@ angular.module('AppCtrl', ['AppServices'])
     ExcusesAPI.getExcuse($stateParams.id)
     .then(function success(res){
         $scope.excuse = res.data
-        console.log("~~~~this ish " + res.data)
+        console.log("~~~~this ish " + $scope.excuse.rating)
     }, function error(err){
         console.log(err)
     })
+
+    $scope.like = function(excuse){
+        $scope.excuse.rating++
+    }
+    $scope.dislike = function(excuse){
+        $scope.excuse.rating--
+    }
 
     $scope.comments = [];
     CommentsAPI.getAllComments()
@@ -136,16 +130,3 @@ angular.module('AppCtrl', ['AppServices'])
         }
     )
 }])
-
-
-
-
-// .controller('CommentController', function(){
-//     this.comment = {};
-//     this.addComment = function(post){
-//       this.comment.createdOn = Date.now();
-//       post.comments.push(this.comment);
-//       this.comment ={};
-//     };
-//   });
-
