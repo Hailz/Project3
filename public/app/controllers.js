@@ -48,15 +48,11 @@ angular.module('AppCtrl', ['AppServices'])
     ExcusesAPI.getAllExcuses()
     .then(function success(res) {
         console.log('in excuses API then promise', res)
-        
         $scope.allExcuses = res.data;
-
-        var first = Math.floor((Math.random()*$scope.allExcuses.length-1)+1);
-        var second = Math.floor((Math.random()*$scope.allExcuses.length-1)+1);
-        var third = Math.floor((Math.random()*$scope.allExcuses.length-1)+1);
-
-
-        $scope.excuses = [$scope.allExcuses[first], $scope.allExcuses[second], $scope.allExcuses[third]];
+        $scope.temp = $scope.allExcuses.sort(function(){
+            return 0.5 - Math.random()
+        })
+        $scope.excuses = [$scope.temp[0], $scope.temp[1], $scope.temp[2]];
         console.log(res.data);
     }, function error(err) {
         console.log("Error", err);

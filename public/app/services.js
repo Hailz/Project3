@@ -35,7 +35,7 @@ angular.module('AppServices', ['ngResource'])
         } else {
             return false;
         }
-        }
+    }
     }
 }])
 .factory("AuthInterceptor", ["Auth", function(Auth) {
