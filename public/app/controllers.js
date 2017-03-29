@@ -58,8 +58,10 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Error", err);
     })
 
-    $scope.sendMsg = function() {
-        Message.sendMessage().then(function success(res) {
+    
+
+    $scope.sendMsg = function(message) {
+        Message.sendMessage(message).then(function success(res) {
             console.log("it's working, people " + res)
         },
         function error(err){

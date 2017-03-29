@@ -2,7 +2,8 @@
 	<div class="col-sm-4" ng-repeat="excuse in excuses track by excuse._id">
 		<div class="excuse-card">
 			<h4 class="card-title">{{excuse.excuse}}</h4>
-      <button ng-click="sendMsg()"></button>		
+      <h5>{{excuse.excuseMsg}}</h5>
+      <button ng-click="sendMsg(excuse.excuseMsg)">Text Me</button>		
 		</div>
 	</div>
 </div>

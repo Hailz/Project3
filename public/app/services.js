@@ -51,7 +51,7 @@ angular.module('AppServices', ['ngResource'])
 }])
 .factory("Message", ["$http", function($http) {
     return {
-        sendMessage: function(){
+        sendMessage: function(message){
             return $http.post('/twilioClient')
         }
     } 

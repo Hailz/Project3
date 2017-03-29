@@ -8,15 +8,17 @@ var Excuses = require('../models/excuses');
 
 var client = require('twilio')(accountSid, authToken);
 
+var message = 'babababababababa';
+
 router.route('/')
 
 .post(function(req, res){ 
     client.messages.create({
       to: '+14252238606',
       from: process.env.TWILIO_NUMBER,
-      body: 'Bananananana!'
+      body: req
     }, function(err, message) {
-      console.log('Banana')
+      console.log('message', message);
       if (err) return res.send(500).send(err);
       return res.send(message);
     });
