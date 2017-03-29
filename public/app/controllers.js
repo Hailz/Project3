@@ -91,8 +91,6 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.excuse = {};
     $scope.user = Auth.currentUser()
 
-
-
     $scope.comment = {};
     $scope.comments = [];
     $scope.newComment = {
@@ -112,11 +110,16 @@ angular.module('AppCtrl', ['AppServices'])
         console.log(err)
     })
 
-    $scope.like = function(excuse){
-        $scope.excuse.rating++
+    $scope.like = function(){
+       rating = $scope.excuse.rating++
+       ExcusesAPI.updateExcuse($scope.excuse).then(function success(res){
+        console.log('update it ' + res)
+       }, function error(err){
+        console.log("Faaaaail " + err)
+       })
     }
     $scope.dislike = function(excuse){
-        $scope.excuse.rating--
+        rating= $scope.excuse.rating--
     }
 
     $scope.comments = [];

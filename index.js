@@ -14,9 +14,7 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
-// var Comments = require('./models/comments');
-// var Excuses = require('./models/excuses');
-// var Favorites = require('./models/favorites');
+
 mongoose.connect('mongodb://localhost/Project3');
 
 // decode POST data in JSON and URL encoded formats

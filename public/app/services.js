@@ -65,8 +65,9 @@ angular.module('AppServices', ['ngResource'])
         getExcuse: function(id){
             return $http.get('/api/excuses/'+id);
         },
-        updateExcuse: function(rating){
-            return $http.put('/api/excuses/'+ excuse._id, rating)
+        updateExcuse: function(excuse){
+             console.log("id is: " + excuse._id, "rating is " + excuse.rating)
+            return $http.put('api/excuses/'+ excuse._id, excuse)
             .then(function success(res){
                 return res.data
             }, function error(err){
