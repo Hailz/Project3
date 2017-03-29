@@ -1,7 +1,5 @@
 angular.module('AppServices', ['ngResource'])
-// .factory('Recipe', ['$resource', function($resource) {
-//     return $resource('/api/recipes/:id');
-// }])
+
 .factory("Auth", ["$window", function($window) {
     return {
         saveToken: function(token) {
@@ -24,7 +22,6 @@ angular.module('AppServices', ['ngResource'])
             try {
             // vuln code
             var payload = JSON.parse($window.atob(token.split(".")[1]));
-            console.log("payload decoded: " + payload);
             return payload;
             }
             catch (err){ 
@@ -51,9 +48,8 @@ angular.module('AppServices', ['ngResource'])
 }])
 .factory("Message", ["$http", function($http) {
     return {
-        sendMessage: function(message){
-            console.log(message)
-            return $http.post('/twilioClient', [message])
+        sendMessage: function(message, number){
+            return $http.post('/twilioClient', [message, number])
         }
     } 
 }])

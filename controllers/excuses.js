@@ -19,7 +19,6 @@ router.route('/:id')
   })
 
 router.put('/:id', function(req, res){
-  console.log("____________"+req.body)
   Excuses.findByIdAndUpdate(req.params.id, req.body, function(err){
     if (err) return res.status(500).send(err);
     return res.send({message: 'success'});

@@ -8,15 +8,14 @@ var Excuses = require('../models/excuses');
 
 var client = require('twilio')(accountSid, authToken);
 
-// var message = 'babababababababa';
-
 router.route('/')
 
 .post(function(req, res){
+  console.log(req.body)
     client.messages.create({
-      to: '+14252238606',
+      to: req.body[1],
       from: process.env.TWILIO_NUMBER,
-      body: req.body
+      body: req.body[0]
     }, function(err, message) {
       console.log('message', message);
       if (err) return res.send(500).send(err);
@@ -27,29 +26,3 @@ router.route('/')
 
 //Export 
 module.exports = router; 
-
-
-
-
-
-
-
-
-
-// var config = require('./config');
-// var client = require('twilio')(config.accountSid, config.authToken);
-
-// module.exports.sendSms = function(to, message) {
-//   client.messages.create({
-//     body: 'OMG GET OUT',
-//     to: +12063840852,
-//     from: config.sendingNumber
-//     // mediaUrl: 'http://www.yourserver.com/someimage.png'
-//   }, function(err, message) {
-//     if (err) {
-//       console.error(message.sid);
-//     } else {
-//       console.log('Excuse sent!');
-//     }
-//   });
-// };

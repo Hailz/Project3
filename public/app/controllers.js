@@ -1,12 +1,15 @@
 angular.module('AppCtrl', ['AppServices'])
-.controller('SignupCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+.controller('SignupCtrl', ['$scope', '$http', '$state', 'Auth', function($scope, $http, $state, Auth) {
     $scope.user = {
         email: '',
-        password: ''
+        password: '',
+        name: '',
+        number: ''
     };
     $scope.userSignup = function() {
         $http.post('/api/users', $scope.user).then(function success(res) {
-        $state.go("home");
+            Auth.saveToken(res.data.token);
+            $state.go("home");
         }, function error(err) {
         console.log("Error", err)
         })
@@ -19,8 +22,8 @@ angular.module('AppCtrl', ['AppServices'])
     };
     $scope.userLogin = function() {
         $http.post("/api/auth", $scope.user).then(function success(res) {
-        Auth.saveToken(res.data.token);
-        $state.go("home")
+            Auth.saveToken(res.data.token);
+            $state.go("home")
         }, function error(err) {
             console.log("Uh oh. Login Failed.")
         })
@@ -56,7 +59,6 @@ angular.module('AppCtrl', ['AppServices'])
             return 0.5 - Math.random()
         })
         $scope.excuses = [$scope.temp[0], $scope.temp[1], $scope.temp[2]];
-        console.log(res.data);
     }, function error(err) {
         console.log("Error", err);
     })
@@ -71,14 +73,17 @@ angular.module('AppCtrl', ['AppServices'])
 
     $scope.tempUser = Auth.currentUser();
     var curUser = $scope.tempUser.id;
+    console.log("User id " + curUser)
+    console.log(UsersAPI.getUser(curUser))
     UsersAPI.getUser(curUser).then(function(user){
         // $scope.currentU = user.data.name;
-        console.log(user.data)
+        console.log("Get dat user " + user.data.name, "phone number: " + user.data.number)
+        $scope.number = user.data.number
     })
 
-    $scope.sendMsg = function(message) {
-        Message.sendMessage(message).then(function success(res) {
-            console.log("it's working, people ")
+    $scope.sendMsg = function(message, number) {
+        Message.sendMessage(message, number).then(function success(res) {
+            console.log("it's working, people " + res)
         },
         function error(err){
             console.log("it's not working, people " + err)
