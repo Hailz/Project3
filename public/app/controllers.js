@@ -29,6 +29,9 @@ angular.module('AppCtrl', ['AppServices'])
 // .controller('AlertsCtrl', ['$scope', 'Alerts', function($scope, Alerts){
 //     $scope.alerts = Alerts.getAll();
 // }])
+
+
+
 .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
   $scope.isLoggedIn = function() {
     return Auth.isLoggedIn();
@@ -84,71 +87,58 @@ angular.module('AppCtrl', ['AppServices'])
         })
     }
 }])
-
-.controller('OneExcuseCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, $stateParams){
-    // $scope.excuse = {};
-    // $scope.user = Auth.currentUser()
-
-    // ExcusesAPI.getExcuse($stateParams.id)
-    // .then(function success(res){
-    // // $scope.excuse = res.data
-    //     console.log(res.data)
-    // }, function error(err){
-    //     console.log(err)
-    // })
-}])
 .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, UsersAPI, $stateParams){
     $scope.excuse = {};
     $scope.user = Auth.currentUser()
 
-    ExcusesAPI.getExcuse($stateParams.id)
-    .then(function success(res){
-        $scope.excuse = res.data
-        console.log("~~~~this ish " + res.data)
-    }, function error(err){
-        console.log(err)
-    })
 
-}])
-.controller('CommentCtrl', ['$scope', '$location', '$stateParams', '$http', 'Auth', 'CommentsAPI', 'UsersAPI', function($scope, $location, $stateParams, $http, Auth, CommentsAPI, UsersAPI){
+
+    $scope.comment = {};
     $scope.comments = [];
-    $scope.currentUserId = user.data.id;
-    $scope.currentUser = user.data.name;
     $scope.newComment = {
             excuseId: '',
             comment: '',
-            commentAuthor: currentUser,
-            userId: currentUserId
+            commentAuthor: $scope.user.name,
+            userId: $scope.user.id
         }  
     $scope.loading = false; 
     $scope.temp = Auth.currentUser();
 
+    ExcusesAPI.getExcuse($stateParams.id)
+    .then(function success(res){
+
+        $scope.excuse = res.data;
+        console.log($scope.user); 
+        console.log("~~~~this ish " + res.data)
+    }, function error(err){
+        console.log(err)
+    })
+    
     CommentsAPI.getAllComments()
     .then(function success(response) {
         $scope.loading = true; 
         $scope.comments = response.data;
         $scope.loading = false; 
         
-        CommentsAPI.createComment($scope.comment)
+        CommentsAPI.createComment($scope.newComment)
         .then(function success(response) {
-            $location.path('/');
+            console.log("Comment added!");
         }, function error(err) {
-            console.log("Error", err);
+            console.log("Create Comment Error", err);
             })
         
         CommentsAPI.deleteComment($stateParams.id)
         .then(function success(response) {
-            $location.path('/excuse');
+            console.log("Comment deleted!")
         }, function error(err) {
-            console.log("Error", err);
+            console.log("Delete Comment Error", err);
             })
         
         CommentsAPI.updateComment($scope.comment)
         .then(function success(response) {
-            console.log("success", response);
-            $location.path('/comment/' + $scope.comment._id);
+            console.log("Comment Updated", response);
         }, function error(err) {
-            console.log("Error", err);
+            console.log("Update Comment Error", err);
             })
 
     }, function error(err) {
@@ -157,16 +147,3 @@ angular.module('AppCtrl', ['AppServices'])
         }
     )
 }])
-
-
-
-
-// .controller('CommentController', function(){
-//     this.comment = {};
-//     this.addComment = function(post){
-//       this.comment.createdOn = Date.now();
-//       post.comments.push(this.comment);
-//       this.comment ={};
-//     };
-//   });
-

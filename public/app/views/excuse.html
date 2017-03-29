@@ -1,9 +1,10 @@
 <h1>Excuse Detail</h1>
 
+
 <div class="row">
 	<div class="col-sm-4">
 		<div class="excuse-card">
-			<h4 class="card-title">{{excuse.excuse}}</h4>
+			 <h4 class="card-title">{{ excuse.excuse }}</h4>
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-2 col-xs-offset-1  text-center ">
@@ -21,31 +22,32 @@
     </div>
 </div>
 
-
 <div class="content">
 	<div class="container">
 		<div class="row">
+			<h4>How did it work for you?</h4>	
+				<form ng-submit="createComment()">
+					<div class="form-group">
+						<label for="comment" >Comment: </label>
+   						<input type="text" class="form-control" ng-model="comment.comment" placeholder="Comment">
+					</div>
+					<div class="form-group">
+						<label for="commentAuthor">By: </label>
+						<input type="text" ng-model="comment.commentAuthor" required placeholder="Author" disabled>
+					</div>
+					<input type="submit" class="btn btn-success" value="Submit">
+				</form>
+
 			<h3>How it worked for others: </h3>
-				<div ng-repeat="c in comments">
-					<p>{{ c.comment }}</p>
-					<p><b>{{ c.commentAuthor }}</b></p>
+				<div ng-repeat="comment in comments">
+					<p>{{ comment.comment }}</p>
+					<p><b>{{ comment.commentAuthor }}</b></p>
 				</div>
 				<div class="text-right">
 					<a class="btn btn-warning btn-xs" ng-show="isLoggedIn()" ng-href="/comments/editComments/{{c._id}}">Edit</a>
 					<a class="btn btn-danger btn-xs" ng-show="isLoggedIn()" ng-click="deleteComment(comments._id)">Delete</a>
 				</div>	
-			<h4>How did it work for you?</h4>	
-				<form ng-submit="createComment()">
-					<div class="form-group">
-						<label for"comment" >Comment: </label>
-   						<input type="text" class="form-control" ng-model="comments.comment" placeholder="Comment">
-					</div>
-					<div class="form-group">
-						<label for="commentAuthor">by:</label>
-						<input type="text" ng-model="Comments.commentAuthor" required placeholder="Author" disabled>
-					</div>
-					<input type="submit" class="btn btn-success" value="Submit">
-				</form>
+		
 		</div>
 	</div>
 </div>
