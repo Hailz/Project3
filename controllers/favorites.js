@@ -17,6 +17,7 @@ router.route('/')
     });
   });
 
+
 // router.get('/:id', function(req, res) {
 //   Favorites.findById(req.params.id, function(err, favorite) {
 //     if (err) return res.status(500).send(err);

@@ -49,25 +49,47 @@ angular.module('AppCtrl', ['AppServices'])
 
 }])
 .controller('FavoritesCtrl', ['$scope', '$http', '$state', 'Auth', 'UsersAPI', 'ExcusesAPI', 'FavoritesAPI', function($scope, $http, $state, Auth, UsersAPI, ExcusesAPI, FavoritesAPI){
+    $scope.allExcuses = [];
+    $scope.allFavorites = [];
     $scope.excuses = [];
+    $scope.favorites = [];
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
     }
 
-    ExcusesAPI.getAllExcuses()
-    .then(function success(res) {
-        console.log('All the excuses are here now...', res)
-        $scope.excuses = res.data;
-    }, function error(err) {
-        console.log("Error", err);
-    })
-
     $scope.tempUser = Auth.currentUser();
     $scope.userId = $scope.tempUser.id;
     console.log("User id " + $scope.userId)
 
-
+    FavoritesAPI.getFavorites()
+    .then(function success(res){
+        console.log('All the favs are here...', res)
+        $scope.allFavorites = res.data
+        console.log($scope.allFavorites[0].userId)
+        for (var i = 0; i < $scope.allFavorites.length; i++){
+            if ($scope.allFavorites[i].userId == $scope.userId){
+                $scope.favorites.push($scope.allFavorites[i])
+            }
+        }
+        ExcusesAPI.getAllExcuses()
+        .then(function success(res) {
+            console.log('All the excuses are here now...', res)
+            $scope.allExcuses = res.data;
+            for (var i = 0; i < $scope.allExcuses.length; i++) {
+                for (var j = 0; j < $scope.favorites.length; j++) {
+                    if ($scope.allExcuses[i]._id == $scope.favorites[j].excuseId){
+                        $scope.excuses.push($scope.allExcuses[i])
+                    }
+                }
+            }
+            console.log("These should be the excuses that match the user favs ",$scope.excuses)
+        }, function error(err) {
+            console.log("Error", err);
+    })
+    }, function error(err){
+        console.log("Boooooo", err)
+    })
 
 }])
 

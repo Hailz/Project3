@@ -1,5 +1,5 @@
 # Project3
-~ Crystal, Hailey, Joe ~
+~ Hailey, Joe ~
 
 #Technical Requirements
 
@@ -15,9 +15,11 @@
 
 # The Startup
 
-  * What is your application (elevator pitch, ideally in one sentence)
-  * What value does your application provide to your audience?
-  * What steps have you taken to entice users? (user experience, a fancy frontend, trying out functionality before being forced to signup)
+  * What is your application (elevator pitch, ideally in one sentence):
+    Everyone has a story about a time they needed to come up with an excuse to get out of something or where a friend used them to get out of something. ExcuseMe generates those excuses for you and provides you with the option to have it appear like someone sent a text to you giving you the feedom to get out of anything.
+  * What value does your application provide to your audience?:
+    ExcuseMe takes the pressure out of coming up with an excuse. All you have to do is flip through our extensive list of excuses and choose the one that works for you. Having the option to have it sent as a text takes the pressure off you having to lie. Simply show the person you're trying to ditch your text and say "Sorry!" and you're free.
+  * What steps have you taken to entice users? (user experience, a fancy frontend, trying out functionality before being forced to signup): Users are free to look though our excuses for free and get a feel for what we have to offer. If they like what they see we encourage them to sign up and that grants them the option of texting themself an excuse text.
 
 
 # Technologies Used:
@@ -27,8 +29,8 @@
   * Java Script
   * Html
   * CSS
-  * Bootstrap? Flexbox?
-  * API??
+  * Bootstrap
+  * Twilio API
 
 # Installation Instructions:
 

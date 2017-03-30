@@ -126,18 +126,15 @@ return {
         getFavorites: function(){
             return $http.get('/api/favorites/');
         },
-        getOneFavorite: function(id){
-            return $http.get('/api/favorites/'+id);
-        },
-        updateFavorite: function(favorite){
-             console.log("id is: " + favorite._id)
-            return $http.put('api/favorites/'+ favorite._id, favorite)
+        deleteFavorite: function(id){
+            return $http.delete('/api/favorites/' + favorite._id)
             .then(function success(res){
                 return res.data
             }, function error(err){
-                return null;
-            });
+                return console.log("Failed to delete " + err)
+            })
         }
+
     }
 }])
 

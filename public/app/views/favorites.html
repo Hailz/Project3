@@ -3,11 +3,11 @@
 </div>
 <div ng-show='isLoggedIn()'>
   <h1>Favorites:</h1>
-  <div ng-repeat='favorite in favorites | filter: favorite.userId == userId'>
+  <div class="row">
     <div class="col-sm-4" ng-repeat="excuse in excuses | filter: search track by excuse._id">
       <div class="excuse-card">
         <a ng-href="/excuse/{{excuse._id}}">
-          <h4 class="card-title">{{excuse.excuse}}</h4>
+        <h4 class="card-title">{{excuse.excuse}}</h4>
         </a>
         <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
       </div>
