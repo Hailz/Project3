@@ -67,14 +67,8 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.userId = $scope.tempUser.id;
     console.log("User id " + $scope.userId)
 
-<<<<<<< HEAD
-=======
-
-
 }])
 
-
->>>>>>> 6eaded004ab8b2c94b27c620af57e9c0378b45bd
 .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
   $scope.isLoggedIn = function() {
     return Auth.isLoggedIn();
