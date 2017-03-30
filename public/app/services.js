@@ -75,21 +75,25 @@ angular.module('AppServices', ['ngResource'])
         }
     }
 }])
-.factory('CommentsAPI', ['$http', function($http){
-return {
+.factory('CommentsAPI', ['$http', '$location', function($http, $location){
+    return {
         getAllComments: function() {
             return $http.get('/api/comments');
         },
-        createComment: function() {
-            console.log('COMMENT BUTTON WORKING');
-            return $http.post('/api/comments/');
+        createComment: function(comment) {
+            return $http.post('/api/comments', comment)
         },
-        deleteComment: function() {
-            return $http.delete('/api/comments/' + id);
+        deleteComment: function(id) {
+            return $http.delete('/api/comments/'+ id)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return null; 
+            });
         },
-        updateComment: function() {
-            return $http.put('/api/comments/' + id);
-        }   
+        // updateComment: function() {
+        //     return $http.put('/api/comments/'+ comment._id);
+        // }   
     }
 }])
 .factory("UsersAPI", ["$http", function($http) {

@@ -4,6 +4,7 @@ require("dotenv").config();
 var path = require('path');
 
 
+
 // JSON web token dependencies, including a secret key to sign the token
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -14,7 +15,7 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
-// var Comments = require('./models/comments');
+var Comments = require('./models/comments');
 // var Excuses = require('./models/excuses');
 // var Favorites = require('./models/favorites');
 mongoose.connect('mongodb://localhost/Project3');
@@ -30,8 +31,10 @@ app.use('/api/users', expressJWT({secret: secret}).unless({
     path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
 
+//Controllers
 app.use('/api/excuses', require('./controllers/excuses'));
 app.use('/api/comments', require('./controllers/comments'));
+app.use('/twilioClient', require('./controllers/twilioClient'));
 // app.use('/api/favorites', require('./controllers/favorites'));
 
 // this middleware will check if expressJWT did not authorize the user, and return a message
@@ -62,9 +65,6 @@ app.post('/api/auth', function(req, res) {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
-
-//Controllers
-app.use('/twilioClient', require('./controllers/twilioClient'));
 
 
 

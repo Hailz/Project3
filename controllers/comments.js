@@ -1,5 +1,5 @@
 var express = require('express');
-var Excuses = require('../models/comments');
+var Comments = require('../models/comments');
 var router = express.Router();
 
 router.route('/')
@@ -10,9 +10,10 @@ router.route('/')
 		});
 	})
 	.post(function(req, res){
-		Comments.create(req.body, function(err, comments){
+		console.log(req.body);
+		Comments.create(req.body, function(err, comment){
 		if (err) return res.status(500).send(err);
-		return res.send(comments);
+		return res.send(comment);
 		});
 	})
 
