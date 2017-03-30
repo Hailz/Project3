@@ -11,13 +11,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-2 col-xs-offset-1  text-center ">
-						<button ng-click='like(excuse)' type="button" class="btn btn-success">&#10004 Like</button>
+						<button ng-click='like()' type="button" class="btn btn-success">&#10004 Like</button>
 					</div>
 					<div class="col-xs-2 text-center ">
-						<button type="button" class="btn btn-warning">&#9733 Favorite</button>
+						<button ng-click='addFavorite()' type="button" class="btn btn-warning">&#9733 Favorite</button>
 					</div>
 					<div class="col-xs-2 text-center ">
-						<button ng-click='dislike(excuse)' type="button" class="btn btn-danger">&#10008 Dislike</button>
+						<button ng-click='dislike()' type="button" class="btn btn-danger">&#10008 Dislike</button>
 					</div>
 				</div>
 			</div>			
@@ -49,13 +49,3 @@
 		</div>
 	</div>
 </div>
-
-  
-
-
-
-
-
-
-
-

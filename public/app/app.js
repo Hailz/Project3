@@ -32,6 +32,11 @@ app.config([
         templateUrl: 'app/views/profile.html',
         controller: 'ProfileCtrl'
     })
+    .state('favorites', {
+        url: '/favorites',
+        templateUrl: 'app/views/favorites.html',
+        controller: 'FavoritesCtrl'
+    })
     .state('excuse', {
         url: '/excuse/:id',
         templateUrl: 'app/views/excuse.html',

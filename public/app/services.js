@@ -1,7 +1,5 @@
 angular.module('AppServices', ['ngResource'])
-// .factory('Recipe', ['$resource', function($resource) {
-//     return $resource('/api/recipes/:id');
-// }])
+
 .factory("Auth", ["$window", function($window) {
     return {
         saveToken: function(token) {
@@ -24,7 +22,6 @@ angular.module('AppServices', ['ngResource'])
             try {
             // vuln code
             var payload = JSON.parse($window.atob(token.split(".")[1]));
-            console.log("payload decoded: " + payload);
             return payload;
             }
             catch (err){ 
@@ -51,9 +48,8 @@ angular.module('AppServices', ['ngResource'])
 }])
 .factory("Message", ["$http", function($http) {
     return {
-        sendMessage: function(message){
-            console.log(message)
-            return $http.post('/twilioClient', [message])
+        sendMessage: function(message, number){
+            return $http.post('/twilioClient', [message, number])
         }
     } 
 }])
@@ -65,8 +61,9 @@ angular.module('AppServices', ['ngResource'])
         getExcuse: function(id){
             return $http.get('/api/excuses/'+id);
         },
-        updateExcuse: function(rating){
-            return $http.put('/api/excuses/'+ excuse._id, rating)
+        updateExcuse: function(excuse){
+             console.log("id is: " + excuse._id, "rating is " + excuse.rating)
+            return $http.put('api/excuses/'+ excuse._id, excuse)
             .then(function success(res){
                 return res.data
             }, function error(err){
@@ -75,8 +72,8 @@ angular.module('AppServices', ['ngResource'])
         }
     }
 }])
-.factory('CommentsAPI', ['$http', '$location', function($http, $location){
-    return {
+.factory('CommentsAPI', ['$http', function($http){
+return {
         getAllComments: function() {
             return $http.get('/api/comments');
         },
@@ -84,22 +81,63 @@ angular.module('AppServices', ['ngResource'])
             return $http.post('/api/comments', comment)
         },
         deleteComment: function(id) {
-            return $http.delete('/api/comments/'+ id)
+            return $http.delete('/api/comments/' + id)
             .then(function success(res){
                 return res.data
             }, function error(err){
-                return null; 
+                return null;
             });
         },
-        // updateComment: function() {
-        //     return $http.put('/api/comments/'+ comment._id);
-        // }   
+        updateComment: function() {
+            return $http.put('/api/comments/'+ comment._id);
+        }   
     }
 }])
 .factory("UsersAPI", ["$http", function($http) {
    return {
-       getUser: function(id) {
-           return $http.get('api/users/' + id)
-       }
+        getUser: function(id) {
+            return $http.get('api/users/' + id)
+        },
+        updateProfile: function(profile){
+            console.log("Profile id: " + profile._id, "Profile name: " + profile.name)
+            return $http.put('/api/users/' + profile._id, profile)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return console.log("Faaaaaailed to update " + err)
+            })
+        },
+        deleteProfile: function(profile){
+            console.log("BUH BYE Profile id: " + profile._id)
+            return $http.delete('/api/users/' + profile._id)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return console.log("Faaaaailed to delete " + err)
+            })
+        }
    }
 }])
+.factory('FavoritesAPI', ['$http', '$location', function($http, $location){
+    return {
+        addFavorite: function(favorite){
+            return $http.post('/api/favorites', favorite)
+        },
+        getFavorites: function(){
+            return $http.get('/api/favorites/');
+        },
+        getOneFavorite: function(id){
+            return $http.get('/api/favorites/'+id);
+        },
+        updateFavorite: function(favorite){
+             console.log("id is: " + favorite._id)
+            return $http.put('api/favorites/'+ favorite._id, favorite)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return null;
+            });
+        }
+    }
+}])
+
