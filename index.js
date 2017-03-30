@@ -14,6 +14,9 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Comments = require('./models/comments');
+var Excuses = require('./models/excuses');
+var Favorites = require('./models/favorites'); 
 
 mongoose.connect('mongodb://localhost/Project3');
 
@@ -30,7 +33,7 @@ app.use('/api/users', expressJWT({secret: secret}).unless({
 
 app.use('/api/excuses', require('./controllers/excuses'));
 app.use('/api/comments', require('./controllers/comments'));
-// app.use('/api/favorites', require('./controllers/favorites'));
+app.use('/api/favorites', require('./controllers/favorites'));
 
 // this middleware will check if expressJWT did not authorize the user, and return a message
 app.use(function (err, req, res, next) {

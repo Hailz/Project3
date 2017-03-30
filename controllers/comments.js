@@ -1,5 +1,5 @@
 var express = require('express');
-var Excuses = require('../models/comments');
+var Comments = require('../models/comments');
 var router = express.Router();
 
 router.route('/')

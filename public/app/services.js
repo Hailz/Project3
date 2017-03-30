@@ -77,12 +77,16 @@ return {
         getAllComments: function() {
             return $http.get('/api/comments');
         },
-        createComment: function() {
-            console.log('COMMENT BUTTON WORKING');
-            return $http.post('/api/comments/');
+        createComment: function(comment) {
+            return $http.post('/api/comments', comment);
         },
-        deleteComment: function() {
-            return $http.delete('/api/comments/' + id);
+        deleteComment: function(id) {
+            return $http.delete('/api/comments/' + id)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return null;
+            });
         },
         updateComment: function() {
             return $http.put('/api/comments/' + id);
@@ -91,8 +95,49 @@ return {
 }])
 .factory("UsersAPI", ["$http", function($http) {
    return {
-       getUser: function(id) {
-           return $http.get('api/users/' + id)
-       }
+        getUser: function(id) {
+            return $http.get('api/users/' + id)
+        },
+        updateProfile: function(profile){
+            console.log("Profile id: " + profile._id, "Profile name: " + profile.name)
+            return $http.put('/api/users/' + profile._id, profile)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return console.log("Faaaaaailed to update " + err)
+            })
+        },
+        deleteProfile: function(profile){
+            console.log("BUH BYE Profile id: " + profile._id)
+            return $http.delete('/api/users/' + profile._id)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return console.log("Faaaaailed to delete " + err)
+            })
+        }
    }
 }])
+.factory('FavoritesAPI', ['$http', '$location', function($http, $location){
+    return {
+        addFavorite: function(favorite){
+            return $http.post('/api/favorites', favorite)
+        },
+        getFavorites: function(){
+            return $http.get('/api/favorites/');
+        },
+        getOneFavorite: function(id){
+            return $http.get('/api/favorites/'+id);
+        },
+        updateFavorite: function(favorite){
+             console.log("id is: " + favorite._id)
+            return $http.put('api/favorites/'+ favorite._id, favorite)
+            .then(function success(res){
+                return res.data
+            }, function error(err){
+                return null;
+            });
+        }
+    }
+}])
+

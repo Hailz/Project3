@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var CommentsSchema = new mongoose.Schema({
-  excuseId: Number,
+  excuseId: mongoose.Schema.Types.ObjectId,
   comment: String,
-  userId: Number,
+  userId: String,
   commentAuthor: String
 });
 
