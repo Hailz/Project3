@@ -11,7 +11,6 @@ var client = require('twilio')(accountSid, authToken);
 router.route('/')
 
 .post(function(req, res){
-  console.log(req.body)
     client.messages.create({
       to: req.body[1],
       from: process.env.TWILIO_NUMBER,

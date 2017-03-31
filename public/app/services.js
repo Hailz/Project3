@@ -99,8 +99,8 @@ return {
             return $http.get('api/users/' + id)
         },
         updateProfile: function(profile){
-            console.log("Profile id: " + profile._id, "Profile name: " + profile.name)
-            return $http.put('/api/users/' + profile._id, profile)
+            console.log("Profile id: " + profile.id, "Profile name: " + profile.name)
+            return $http.put('/api/users/' + profile.id, profile)
             .then(function success(res){
                 return res.data
             }, function error(err){
@@ -127,7 +127,8 @@ return {
             return $http.get('/api/favorites/');
         },
         deleteFavorite: function(id){
-            return $http.delete('/api/favorites/' + favorite._id)
+            console.log("Data check: "+id)
+            return $http.delete('/api/favorites', [id])
             .then(function success(res){
                 return res.data
             }, function error(err){
