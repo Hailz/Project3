@@ -6,7 +6,6 @@ router.route('/')
   .get(function(req, res) {
     User.find(function(err, users) {
       if (err) return res.status(500).send(err);
-
       return res.send(users);
     });
   })
@@ -17,7 +16,6 @@ router.route('/')
 
       User.create(req.body, function(err, user) {
         if (err) return res.status(500).send(err);
-
         return res.send(user);
       });
     });
@@ -26,7 +24,6 @@ router.route('/')
 router.get('/:id', function(req, res) {
   User.findById(req.params.id, function(err, user) {
     if (err) return res.status(500).send(err);
-
     return res.send(user);
   });
 });
@@ -38,7 +35,6 @@ router.put('/:id', function(req, res){
     });
   });
 router.delete('/:id', function(req, res){
-  console.log('router.delete/:id')
   User.findByIdAndRemove(req.params.id, function(err){
     if (err) return res.status(500).send(err);
     return res.send({message: 'Success'});

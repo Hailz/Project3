@@ -8,7 +8,12 @@ angular.module('AppCtrl', ['AppServices'])
     };
     $scope.userSignup = function() {
         $http.post('/api/users', $scope.user).then(function success(res) {
-            $state.go("home");
+            $http.post("/api/auth", $scope.user).then(function success(res) {
+                Auth.saveToken(res.data.token);
+                $state.go("home")
+            }, function error(err) {
+                console.log("Uh oh. Login Failed.")
+            })
         }, function error(err) {
         console.log("Error", err)
         })
