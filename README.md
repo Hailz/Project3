@@ -1,5 +1,5 @@
 # Project3
-~ Crystal, Hailey, Joe ~
+~ Hailey & Joe ~
 
 #Technical Requirements
 
@@ -15,9 +15,11 @@
 
 # The Startup
 
-  * What is your application (elevator pitch, ideally in one sentence)
-  * What value does your application provide to your audience?
-  * What steps have you taken to entice users? (user experience, a fancy frontend, trying out functionality before being forced to signup)
+  * What is your application (elevator pitch, ideally in one sentence):
+    Everyone has a story about a time they needed to come up with an excuse to get out of something or where a friend used them to get out of something. ExcuseMe generates those excuses for you and provides you with the option to have it appear like someone sent a text to you giving you the feedom to get out of anything.
+  * What value does your application provide to your audience?:
+    ExcuseMe takes the pressure out of coming up with an excuse. All you have to do is flip through our extensive list of excuses and choose the one that works for you. Having the option to have it sent as a text takes the pressure off you having to lie. Simply show the person you're trying to ditch your text and say "Sorry!" and you're free.
+  * What steps have you taken to entice users? (user experience, a fancy frontend, trying out functionality before being forced to signup): Users are free to look though our excuses for free and get a feel for what we have to offer. If they like what they see we encourage them to sign up and that grants them the option of texting themself an excuse text, it also allows them to save their favorite excuses for fast future access. 
 
 
 # Technologies Used:
@@ -27,8 +29,8 @@
   * Java Script
   * Html
   * CSS
-  * Bootstrap? Flexbox?
-  * API??
+  * Bootstrap
+  * Twilio API
 
 # Installation Instructions:
 
@@ -50,4 +52,12 @@
   ## Day 2:
   The struggle continues. Twilio will only send texts to Joe's phone today. We're looking into why and trying to fix that. We're also building out the routes and HTML for the rest of the app.
 
+  ## Day 3:
+  We had a pretty successful day. Added a lot of various points of functionality despite having to redistribute the tasks due to losing a team member.
+
+  ## Day 4:
+  We finished up our core functionalities. Favorites works, comments works, along with profile updating and several other things. Things are looking good for deployment tomorrow.
+
 # Roadbumps:
+
+The Twilio API took a while to figure out and required a lot of work. Figuring out how to update the comments took a lot of work as well.

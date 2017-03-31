@@ -103,17 +103,17 @@ return {
             return $http.get('api/users/' + id)
         },
         updateProfile: function(profile){
-            console.log("Profile id: " + profile._id, "Profile name: " + profile.name)
-            return $http.put('/api/users/' + profile._id, profile)
+            console.log("Profile id: " + profile.id, "Profile name: " + profile.name)
+            return $http.put('/api/users/' + profile.id, profile)
             .then(function success(res){
                 return res.data
             }, function error(err){
-                return console.log("Faaaaaailed to update " + err)
+                return console.log(err)
             })
         },
         deleteProfile: function(profile){
-            console.log("BUH BYE Profile id: " + profile._id)
-            return $http.delete('/api/users/' + profile._id)
+            console.log("BUH BYE Profile id: " + profile)
+            return $http.delete('/api/users/' + profile)
             .then(function success(res){
                 return res.data
             }, function error(err){
@@ -130,18 +130,16 @@ return {
         getFavorites: function(){
             return $http.get('/api/favorites/');
         },
-        getOneFavorite: function(id){
-            return $http.get('/api/favorites/'+id);
-        },
-        updateFavorite: function(favorite){
-             console.log("id is: " + favorite._id)
-            return $http.put('api/favorites/'+ favorite._id, favorite)
+        deleteFavorite: function(id){
+            console.log("Data check: "+id)
+            return $http.delete('/api/favorites/' + id)
             .then(function success(res){
                 return res.data
             }, function error(err){
-                return null;
-            });
+                return console.log("Failed to delete " + err)
+            })
         }
+
     }
 }])
 

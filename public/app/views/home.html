@@ -1,18 +1,33 @@
-<div class="form-group input-group">
+<div class="form-group input-group text-center">
   <label>Refine your lie...</label>
   <input type='text' class="form-control" id="search" ng-model='search' placeholder="Enter lie key word">
 </div>
-<div class="row">
-	<div class="col-sm-4" ng-repeat="excuse in excuses | filter: search track by excuse._id">
+<div ng-if='search' class="row">
+	<div class="col-sm-4" ng-repeat="excuse in allExcuses | filter: search track by excuse._id">
     
 		<div class="excuse-card">
       <a ng-href="/excuse/{{excuse._id}}">
       <h4 class="card-title">{{excuse.excuse}}</h4>
+      
       </a>
       <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>		
 		</div>
+    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
 	</div>
+</div>
+<div ng-if='!search' class="row">
+  <div class="col-sm-4" ng-repeat="excuse in excuses track by excuse._id">
+    
+    <div class="excuse-card">
+      <a ng-href="/excuse/{{excuse._id}}">
+      <h4 class="card-title">{{excuse.excuse}}</h4>
+      </a>
+      <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
+    </div>
+    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
+
+  </div>
 </div>
 <button ng-click='reDraw()'>Re-Draw</button>
 

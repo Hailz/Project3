@@ -1,0 +1,16 @@
+body{
+  background-color: #504C4C;
+  color: #95989A;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+.excuse-card{
+  width: 100px;
+  height: 166px;
+  border-radius: 5%;
+  background-color: black;
+  color: white;
+}
+

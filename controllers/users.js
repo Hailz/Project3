@@ -32,13 +32,17 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res){
-    User.findByIdAndUpdate(req.params.id, req.body, function(req, res){
+    User.findByIdAndUpdate(req.params.id, req.body, function(err){
       if (err) return res.status(500).send(err);
       return res.send({message: 'Updated account!'});
     });
   });
 router.delete('/:id', function(req, res){
   console.log('router.delete/:id')
+  User.findByIdAndRemove(req.params.id, function(err){
+    if (err) return res.status(500).send(err);
+    return res.send({message: 'Success'});
+  })
 })
 
 module.exports = router;

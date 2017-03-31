@@ -8,7 +8,6 @@ angular.module('AppCtrl', ['AppServices'])
     };
     $scope.userSignup = function() {
         $http.post('/api/users', $scope.user).then(function success(res) {
-            Auth.saveToken(res.data.token);
             $state.go("home");
         }, function error(err) {
         console.log("Error", err)
@@ -32,7 +31,7 @@ angular.module('AppCtrl', ['AppServices'])
 // .controller('AlertsCtrl', ['$scope', 'Alerts', function($scope, Alerts){
 //     $scope.alerts = Alerts.getAll();
 // }])
-.controller('ProfileCtrl', ['$scope', '$http', '$state', 'Auth', 'UsersAPI', function($scope, $http, $state, Auth, UsersAPI){
+.controller('ProfileCtrl', ['$scope', '$http', '$state', '$location', 'Auth', 'UsersAPI', function($scope, $http, $state, $location, Auth, UsersAPI){
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
     }
@@ -46,44 +45,101 @@ angular.module('AppCtrl', ['AppServices'])
         $scope.user = user.data
     })
 
+    $scope.updateProfile =function(){
+        UsersAPI.updateProfile($scope.user).then(function success(res){
+            console.log(res)
+            $location.path('/profile')
+        }, function error(err){
+            console.log(err);
+        })
+    }
+
+    $scope.deleteProfile = function(id){
+        console.log(id)
+        UsersAPI.deleteProfile(id).then(function success(res){
+            Auth.removeToken();
+            $location.path('/');
+        }, function error(err){
+            console.log(err)
+        })
+    }
 
 }])
-.controller('FavoritesCtrl', ['$scope', '$http', '$state', 'Auth', 'UsersAPI', 'ExcusesAPI', 'FavoritesAPI', function($scope, $http, $state, Auth, UsersAPI, ExcusesAPI, FavoritesAPI){
+.controller('FavoritesCtrl', ['$scope', '$http', '$state', '$location', 'Message', 'Auth', 'UsersAPI', 'ExcusesAPI', 'FavoritesAPI', function($scope, $http, $state, $location, Message, Auth, UsersAPI, ExcusesAPI, FavoritesAPI){
+    $scope.allExcuses = [];
+    $scope.allFavorites = [];
     $scope.excuses = [];
+    $scope.favorites = [];
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
     }
 
-    ExcusesAPI.getAllExcuses()
-    .then(function success(res) {
-        console.log('All the excuses are here now...', res)
-        $scope.excuses = res.data;
-    }, function error(err) {
-        console.log("Error", err);
-    })
-
     $scope.tempUser = Auth.currentUser();
     $scope.userId = $scope.tempUser.id;
     console.log("User id " + $scope.userId)
 
-}])
+    UsersAPI.getUser($scope.userId).then(function(user){
+        $scope.number = user.data.number
+    })
 
+    FavoritesAPI.getFavorites()
+    .then(function success(res){
+        $scope.allFavorites = res.data
+        for (var i = 0; i < $scope.allFavorites.length; i++){
+            if ($scope.allFavorites[i].userId == $scope.userId){
+                $scope.favorites.push($scope.allFavorites[i])
+            }
+        }
+        ExcusesAPI.getAllExcuses()
+        .then(function success(res) {
+            $scope.allExcuses = res.data;
+            for (var i = 0; i < $scope.allExcuses.length; i++) {
+                for (var j = 0; j < $scope.favorites.length; j++) {
+                    if ($scope.allExcuses[i]._id == $scope.favorites[j].excuseId){
+                        $scope.excuses.push($scope.allExcuses[i])
+                    }
+                }
+            }
+        }, function error(err) {
+            console.log("Error", err);
+    })
+    }, function error(err){
+        console.log("Boooooo", err)
+    })
+
+    $scope.deleteFav = function(id){
+        console.log("Excuse ID is: ", id)
+        FavoritesAPI.deleteFavorite(id).then(function success(res){
+            $location.path('/favorites');
+        }, function error(err){
+            console.log("Nope "+err);
+        })
+    }
+    $scope.sendMsg = function(message, number) {
+        Message.sendMessage(message, number).then(function success(res) {
+            console.log("it's working, people " + res)
+        },
+        function error(err){
+            console.log("it's not working, people " + err)
+        })
+    }
+}])
 .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
-  $scope.isLoggedIn = function() {
-    return Auth.isLoggedIn();
-  }
-  $scope.logout = function() {
-    console.log("Before Logout", Auth.getToken());
-    Auth.removeToken();
-    console.log("After Logout", Auth.getToken());
-    $location.path("/login");
-  };
+    $scope.isLoggedIn = function() {
+        return Auth.isLoggedIn();
+    }
+    $scope.logout = function() {
+        console.log("Before Logout", Auth.getToken());
+        Auth.removeToken();
+        console.log("After Logout", Auth.getToken());
+        $location.path("/login");
+    };
 }])
 .controller('HomeCtrl', ['$scope', '$location', '$http', 'Message', 'ExcusesAPI', 'Auth', 'UsersAPI', function($scope, $location, $http, Message, ExcusesAPI, Auth, UsersAPI) {
     $scope.allExcuses = [];
     $scope.excuses = [];
-    $scope.searchTerm;
+
 
     ExcusesAPI.getAllExcuses()
     .then(function success(res) {
@@ -98,7 +154,6 @@ angular.module('AppCtrl', ['AppServices'])
     })
 
     $scope.reDraw = function(){
-        console.log('Shuffle click')
          $scope.temp = $scope.allExcuses.sort(function(){
             return 0.5 - Math.random()
         })
@@ -119,15 +174,6 @@ angular.module('AppCtrl', ['AppServices'])
         },
         function error(err){
             console.log("it's not working, people " + err)
-        })
-    }
-    $scope.searchExcuses = function() {
-        console.log("here")
-        ExcusesAPI.getAllExcuses($scope.searchTerm).then(function (res) {
-            console.log(res)
-            $scope.excuses = res.config.data;
-        }, function error(err) {
-            console.log("Nooo", err)
         })
     }
 }])
@@ -185,14 +231,13 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Add favorite " + res)
             $location.path('/')
         }, function error(err){
-            console.log('You terrible failure you. No favorites for you. ' + err.body)
+            console.log("Favorite add failed.")
         })
     }
 
     $scope.createComment = function() {    
         CommentsAPI.createComment($scope.newComment)
         .then(function success(res) {
-            // console.log("Comment added!", $scope.newComment, res.data, $scope.comments, $scope.comments._id);
             console.log(res.data);
             $scope.comments.push(res.data);
             $scope.newComment = {};
@@ -216,7 +261,6 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.comment = {
         comment: ''
     };
-    // console.log($stateParams);
  
 CommentsAPI.getComment($stateParams.id)
 .then(function success(res){
@@ -234,15 +278,9 @@ CommentsAPI.getComment($stateParams.id)
         $scope.comment = res.data; 
         console.log($scope.comment);
         $location.path('/excuse/:id');
-        // $location(); 
-        // console.log('you can update your comment');
     }, function error(err) {
          console.log("Error", err);
-
     });
 
     }
-        
-
-
 }]);

@@ -11,32 +11,20 @@ router.route('/')
     });
   })
   .post(function(req, res) {
-    Favorites.create(req.body, function(err, favorite){
-      if (err) return res.status(500).send(err);
-      return res.send(favorite)
+    Favorites.findOne({excuseId: req.body.excuseId}, function(err, favorite){
+      if (favorite) return res.status(400).send({ message: 'Favorite already exhists!'});
+      Favorites.create(req.body, function(err, favorite){
+        if (err) return res.status(500).send(err);
+        return res.send(favorite)
+      });
     });
   });
 
-// router.get('/:id', function(req, res) {
-//   Favorites.findById(req.params.id, function(err, favorite) {
-//     if (err) return res.status(500).send(err);
-
-//     return res.send(favorite);
-//   });
-// });
-
-router.put('/:id', function(req, res){
-    Favorites.findByIdAndUpdate(req.params.id, req.body, function(req, res){
-      if (err) return res.status(500).send(err);
-      return res.send({message: 'Updated favorites!'});
-  });
-});
-router.delete('/:id', function(req, res){
-  console.log('router.delete/:id')
-  // Favorites.findByIdAndRemove(req.params.id, function(err){
-  //   if (err) return res.status(500).send(err);
-  //   return res.send({message: 'Favorite Deleted'})
+router.route('/:id').delete(function(req, res){
+  Favorites.findOneAndRemove({ excuseId: req.params.id }, function(err){ 
+    if (err) return res.status(500).send(err);
+    return res.send({message: 'Favorite Deleted'})
   })
-// })
+})
 
 module.exports = router;
