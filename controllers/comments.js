@@ -11,7 +11,6 @@ router.route('/')
 		});
 	})
 	.post(function(req, res){
-		console.log(req.body);
 		Comments.create(req.body, function(err, comment){
 		if (err) return res.status(500).send(err);
 		return res.send(comment);

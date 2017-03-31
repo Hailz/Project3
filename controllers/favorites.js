@@ -8,8 +8,8 @@ router.route('/')
       if (err) return res.status(500).send(err);
 
       return res.send(favorites);
-    });
-  })
+  });
+})  
   .post(function(req, res) {
     Favorites.findOne({excuseId: req.body.excuseId}, function(err, favorite){
       if (favorite) return res.status(400).send({ message: 'Favorite already exhists!'});

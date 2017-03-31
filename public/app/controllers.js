@@ -184,7 +184,7 @@ angular.module('AppCtrl', ['AppServices'])
 .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', 'FavoritesAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, UsersAPI, FavoritesAPI,  $stateParams){
     $scope.excuse = {};
     $scope.user = Auth.currentUser();
-    $scope.comments = {};
+    $scope.comments = [];
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
@@ -204,7 +204,15 @@ angular.module('AppCtrl', ['AppServices'])
     });
     CommentsAPI.getAllComments()
     .then(function success(res) {
-        $scope.comments = res.data;
+        $scope.tempcomments = res.data;
+        console.log($scope.excuse._id);
+        // console.log($scope.comments);
+         for(var i = 0; i < $scope.tempcomments.length; i++) {
+                if ($scope.tempcomments[i].excuseId == $scope.excuse._id) {
+                    $scope.comments.push($scope.tempcomments[i]);
+                    $scope.comments = $scope.comments.reverse(); 
+                }
+            }
     }, function error(err) {
         console.log("Error", err);
     });
@@ -232,21 +240,23 @@ angular.module('AppCtrl', ['AppServices'])
             excuseId: $scope.excuse._id
         }
         console.log($scope.newFavorite)
-        FavoritesAPI.addFavorite($scope.newFavorite).then(function success(res){
+        FavoritesAPI.addFavorite($scope.newFavorite)
+        .then(function success(res){
             console.log("Add favorite " + res)
-            $location.path('/')
+            $location.path('/');
         }, function error(err){
             console.log("Favorite add failed.")
         })
     };
 
-    $scope.createComment = function() {    
+    $scope.createComment = function() {  
+        console.log($scope.excuse._id );
         CommentsAPI.createComment($scope.newComment)
         .then(function success(res) {
-            console.log(res.data);
             $scope.comments.push(res.data);
-            $scope.newComment = {};
-            console.log($scope.comments);
+            $scope.comments = $scope.comments.reverse(); 
+            // $scope.newComment = {};
+            $location.path("/excuse/" + $scope.excuse._id);
         }, function error(err) {
             console.log("Create Comment Error", err);
         });
