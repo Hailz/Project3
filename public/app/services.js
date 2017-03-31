@@ -77,9 +77,16 @@ return {
         getAllComments: function() {
             return $http.get('/api/comments');
         },
-        createComment: function(comment) {
-            return $http.post('/api/comments', comment);
+        getComment: function(id){
+            return $http.get('/api/comments/'+id);
         },
+        createComment: function(comment) {
+            return $http.post('/api/comments', comment)
+        },
+        updateComment: function(id, comment) {
+            return $http.put('/api/comments/'+ id, comment)
+
+            }, 
         deleteComment: function(id) {
             return $http.delete('/api/comments/' + id)
             .then(function success(res){
@@ -88,9 +95,6 @@ return {
                 return null;
             });
         },
-        updateComment: function() {
-            return $http.put('/api/comments/' + id);
-        }   
     }
 }])
 .factory("UsersAPI", ["$http", function($http) {

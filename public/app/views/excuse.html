@@ -43,10 +43,13 @@
 					<div ng-repeat="c in comments track by $index" class="well">
 						<p>{{ c.comment }}</p>
 						<p>{{ c.commentAuthor }}</p>
-						<a class="btn btn-warning btn-xs" ng-href="/comments/editComments/{{c._id}}">Edit</a>
+						<a class="btn btn-warning btn-xs" ng-href="/editcomment/{{c._id}}">Edit</a>
 						<a class="btn btn-danger btn-xs" ng-click="deleteComment(c._id, $index)">Delete</a>
 					</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<!-- {{c._id}} -->

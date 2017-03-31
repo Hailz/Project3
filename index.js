@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 require("dotenv").config();
 var path = require('path');
 
-
 // JSON web token dependencies, including a secret key to sign the token
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -31,9 +30,12 @@ app.use('/api/users', expressJWT({secret: secret}).unless({
     path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
 
+//Controllers
 app.use('/api/excuses', require('./controllers/excuses'));
 app.use('/api/comments', require('./controllers/comments'));
+app.use('/twilioClient', require('./controllers/twilioClient'));
 app.use('/api/favorites', require('./controllers/favorites'));
+
 
 // this middleware will check if expressJWT did not authorize the user, and return a message
 app.use(function (err, req, res, next) {
@@ -63,10 +65,6 @@ app.post('/api/auth', function(req, res) {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
-
-//Controllers
-app.use('/twilioClient', require('./controllers/twilioClient'));
-
 
 
 var server = app.listen(process.env.PORT || 3000);
