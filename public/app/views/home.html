@@ -1,39 +1,54 @@
 <div ng-hide="isLoggedIn()">
   <h2>Signup or login to text yourself excuses "from another person"!</h2>
 </div>
+
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-5 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-4 col-xs-offset-4">
     <div class="form-group input-group text-center">
       <label>Refine your lie...</label>
       <input type='text' class="form-control" id="search" ng-model='search' placeholder="Enter lie key word">
     </div>
   </div>
 </div>
-<div ng-if='search' class="row">
-  <div class="col-sm-4" ng-repeat="excuse in allExcuses | filter: search track by excuse._id">
-    
-    <div class="excuse-card">
-      <a ng-href="/excuse/{{excuse._id}}">
-      <h4 class="card-title">{{excuse.excuse}}</h4>
-      
-      </a>
-      <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>    
-    </div>
-    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
+<div class="container">
+<container>
+  <div class="row">
+    <div ng-if='search' ng-repeat="excuse in allExcuses | filter: search track by excuse._id">
+      <div class="col-xs-4">
+        <div class="excuse-card">
+
+          <a ng-href="/excuse/{{excuse._id}}">
+            <h4 class="card-title">{{excuse.excuse}}</h4>
+          </a>
+          <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>    
+          <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div ng-if='!search' class="row">
-  <div class="col-sm-4" ng-repeat="excuse in excuses track by excuse._id">
-    
-    <div class="excuse-card">
-      <a ng-href="/excuse/{{excuse._id}}">
-      <h4 class="card-title">{{excuse.excuse}}</h4>
-      </a>
-      <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
-    </div>
-    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
+
+
+<div class="container">
+  <div class="row">
+    <div ng-if='!search' ng-repeat="excuse in excuses track by excuse._id">
+      <div class="col-xs-">
+        <div class="excuse-card">
+
+          <a ng-href="/excuse/{{excuse._id}}">
+            <h4 class="card-title">{{excuse.excuse}}</h4>
+          </a>
+          <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>    
+          <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
+
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</div> 
+
+
 <button ng-click='reDraw()'>Re-Draw</button>

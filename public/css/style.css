@@ -12,10 +12,9 @@ a{
   border-radius: 5%;
   background-color: black;
   color: white;
+  margin: 0, auto;
+/*  text-align: center;*/
 }
 
-.col-centered {
-	float: none;
-    margin: 0 auto;
-}
+
 
