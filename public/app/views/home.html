@@ -1,3 +1,6 @@
+<div ng-hide="isLoggedIn()">
+  <h2>Signup or login to text yourself excuses "from another person"!</h2>
+</div>
 <div class="form-group input-group text-center">
   <label>Refine your lie...</label>
   <input type='text' class="form-control" id="search" ng-model='search' placeholder="Enter lie key word">
@@ -10,7 +13,7 @@
       <h4 class="card-title">{{excuse.excuse}}</h4>
       
       </a>
-      <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>		
+      <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>		
 		</div>
     <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
@@ -23,7 +26,7 @@
       <a ng-href="/excuse/{{excuse._id}}">
       <h4 class="card-title">{{excuse.excuse}}</h4>
       </a>
-      <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
+      <button ng-show="isLoggedIn()" ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
     </div>
     <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
