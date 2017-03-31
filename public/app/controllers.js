@@ -111,7 +111,7 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.deleteFav = function(id){
         console.log("Excuse ID is: ", id)
         FavoritesAPI.deleteFavorite(id).then(function success(res){
-            $location.path('/favorites');
+            $location.path('/');
         }, function error(err){
             console.log("Nope "+err);
         })
