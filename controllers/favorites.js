@@ -11,7 +11,7 @@ router.route('/')
   });
 })  
   .post(function(req, res) {
-    Favorites.findOne({excuseId: req.body.excuseId}, function(err, favorite){
+    Favorites.findOne({excuseId: req.body.excuseId, userId: req.body.userId}, function(err, favorite){
       if (favorite) return res.status(400).send({ message: 'Favorite already exhists!'});
       Favorites.create(req.body, function(err, favorite){
         if (err) return res.status(500).send(err);
