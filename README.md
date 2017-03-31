@@ -58,6 +58,9 @@
   ## Day 4:
   We finished up our core functionalities. Favorites works, comments works, along with profile updating and several other things. Things are looking good for deployment tomorrow.
 
+  ## Day 5:
+  We went through and corrected any bugs we found in our code and started using more Bootstrap to style our app. We also deployed our app to Heroku.
+
 # Roadbumps:
 
 The Twilio API took a while to figure out and required a lot of work. Figuring out how to update the comments took a lot of work as well.

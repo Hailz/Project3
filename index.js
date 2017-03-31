@@ -17,7 +17,7 @@ var Comments = require('./models/comments');
 var Excuses = require('./models/excuses');
 var Favorites = require('./models/favorites'); 
 
-mongoose.connect('mongodb://localhost/Project3');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Project3');
 
 // decode POST data in JSON and URL encoded formats
 app.use(bodyParser.json());

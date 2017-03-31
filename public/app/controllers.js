@@ -8,7 +8,12 @@ angular.module('AppCtrl', ['AppServices'])
     };
     $scope.userSignup = function() {
         $http.post('/api/users', $scope.user).then(function success(res) {
-            $state.go("home");
+            $http.post("/api/auth", $scope.user).then(function success(res) {
+                Auth.saveToken(res.data.token);
+                $state.go("home")
+            }, function error(err) {
+                console.log("Uh oh. Login Failed.")
+            })
         }, function error(err) {
         console.log("Error", err)
         })
@@ -111,7 +116,7 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.deleteFav = function(id){
         console.log("Excuse ID is: ", id)
         FavoritesAPI.deleteFavorite(id).then(function success(res){
-            $location.path('/favorites');
+            $location.path('/');
         }, function error(err){
             console.log("Nope "+err);
         })
