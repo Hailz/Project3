@@ -107,11 +107,8 @@ angular.module('AppCtrl', ['AppServices'])
     })
 
     $scope.deleteFav = function(id){
-        console.log("Message ID is: ", id)
-        $scope.thang = id.toString();
-        console.log($scope.thang)
-        FavoritesAPI.deleteFavorite($scope.thang).then(function success(res){
-            console.log("Yaaaas "+ res)
+        console.log("Excuse ID is: ", id)
+        FavoritesAPI.deleteFavorite(id).then(function success(res){
             $location.path('/favorites');
         }, function error(err){
             console.log("Nope "+err);
@@ -140,7 +137,7 @@ angular.module('AppCtrl', ['AppServices'])
 .controller('HomeCtrl', ['$scope', '$location', '$http', 'Message', 'ExcusesAPI', 'Auth', 'UsersAPI', function($scope, $location, $http, Message, ExcusesAPI, Auth, UsersAPI) {
     $scope.allExcuses = [];
     $scope.excuses = [];
-    $scope.searchTerm;
+
 
     ExcusesAPI.getAllExcuses()
     .then(function success(res) {
@@ -155,7 +152,6 @@ angular.module('AppCtrl', ['AppServices'])
     })
 
     $scope.reDraw = function(){
-        console.log('Shuffle click')
          $scope.temp = $scope.allExcuses.sort(function(){
             return 0.5 - Math.random()
         })
@@ -177,15 +173,6 @@ angular.module('AppCtrl', ['AppServices'])
         },
         function error(err){
             console.log("it's not working, people " + err)
-        })
-    }
-    $scope.searchExcuses = function() {
-        console.log("here")
-        ExcusesAPI.getAllExcuses($scope.searchTerm).then(function (res) {
-            console.log(res)
-            $scope.excuses = res.config.data;
-        }, function error(err) {
-            console.log("Nooo", err)
         })
     }
 }])
@@ -243,7 +230,7 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Add favorite " + res)
             $location.path('/')
         }, function error(err){
-            console.log('You terrible failure you. No favorites for you. ' + err.body)
+            console.log("Favorite add failed.")
         })
     }
 

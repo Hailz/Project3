@@ -128,7 +128,7 @@ return {
         },
         deleteFavorite: function(id){
             console.log("Data check: "+id)
-            return $http.delete('/api/favorites', [id])
+            return $http.delete('/api/favorites/' + id)
             .then(function success(res){
                 return res.data
             }, function error(err){

@@ -1,5 +1,5 @@
 # Project3
-~ Hailey, Joe ~
+~ Hailey & Joe ~
 
 #Technical Requirements
 
@@ -52,4 +52,12 @@
   ## Day 2:
   The struggle continues. Twilio will only send texts to Joe's phone today. We're looking into why and trying to fix that. We're also building out the routes and HTML for the rest of the app.
 
+  ## Day 3:
+  We had a pretty successful day. Added a lot of various points of functionality despite having to redistribute the tasks due to losing a team member.
+
+  ## Day 4:
+  We finished up our core functionalities. Favorites works, comments works, along with profile updating and several other things. Things are looking good for deployment tomorrow.
+
 # Roadbumps:
+
+The Twilio API took a while to figure out and required a lot of work. Figuring out how to update the comments took a lot of work as well.

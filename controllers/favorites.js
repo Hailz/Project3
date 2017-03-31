@@ -11,17 +11,20 @@ router.route('/')
     });
   })
   .post(function(req, res) {
-    Favorites.create(req.body, function(err, favorite){
-      if (err) return res.status(500).send(err);
-      return res.send(favorite)
+    Favorites.findOne({excuseId: req.body.excuseId}, function(err, favorite){
+      if (favorite) return res.status(400).send({ message: 'Favorite already exhists!'});
+      Favorites.create(req.body, function(err, favorite){
+        if (err) return res.status(500).send(err);
+        return res.send(favorite)
+      });
     });
+  });
+
+router.route('/:id').delete(function(req, res){
+  Favorites.findOneAndRemove({ excuseId: req.params.id }, function(err){ 
+    if (err) return res.status(500).send(err);
+    return res.send({message: 'Favorite Deleted'})
   })
-  .delete(function(req, res){
-    console.log("HeyOOO " + req.body[0])
-  // Favorites.findOneAndRemove({ excuseId: req.body[0] }, function(err){ 
-  //   if (err) return res.status(500).send(err);
-  //   return res.send({message: 'Favorite Deleted'})
-  // })
 })
 
 module.exports = router;
