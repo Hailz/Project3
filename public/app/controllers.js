@@ -153,6 +153,10 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Error", err);
     })
 
+    $scope.isLoggedIn = function() {
+        return Auth.isLoggedIn();
+    }
+
     $scope.reDraw = function(){
          $scope.temp = $scope.allExcuses.sort(function(){
             return 0.5 - Math.random()
@@ -182,6 +186,10 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.user = Auth.currentUser();
     $scope.comments = [];
 
+    $scope.isLoggedIn = function() {
+        return Auth.isLoggedIn();
+    }
+
     ExcusesAPI.getExcuse($stateParams.id)
     .then(function success(res){
         $scope.excuse = res.data
@@ -191,13 +199,9 @@ angular.module('AppCtrl', ['AppServices'])
             commentAuthor: $scope.user.name,
             userId: $scope.user.id
         };
-
-     
-
     }, function error(err){
         console.log(err)
-    })
-
+    });
     CommentsAPI.getAllComments()
     .then(function success(res) {
         $scope.tempcomments = res.data;
@@ -220,7 +224,7 @@ angular.module('AppCtrl', ['AppServices'])
        }, function error(err){
         console.log("Faaaaail " + err)
        })
-    }
+    };
     $scope.dislike = function(){
         rating= $scope.excuse.rating--
         ExcusesAPI.updateExcuse($scope.excuse).then(function success(res){
@@ -228,8 +232,7 @@ angular.module('AppCtrl', ['AppServices'])
        }, function error(err){
         console.log("Faaaaail " + err)
        })
-    }
-
+    };
     $scope.addFavorite = function(){
         console.log("Excuse id: " + $scope.excuse._id, "User id: " + $scope.user.id)
         $scope.newFavorite = {
@@ -244,7 +247,7 @@ angular.module('AppCtrl', ['AppServices'])
         }, function error(err){
             console.log("Favorite add failed.")
         })
-    }
+    };
 
     $scope.createComment = function() {  
         console.log($scope.excuse._id );
@@ -256,7 +259,7 @@ angular.module('AppCtrl', ['AppServices'])
             $location.path("/excuse/" + $scope.excuse._id);
         }, function error(err) {
             console.log("Create Comment Error", err);
-            });
+        });
     };
 
     $scope.deleteComment = function(commentId, $index) {
@@ -266,7 +269,7 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Comment deleted!");
         }, function error(err) {
             console.log("Delete Comment Error", err);
-            });
+        });
     };
 }])
 .controller('EditCommentCtrl', ['$scope', '$state', 'Auth', '$location', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', 'FavoritesAPI', '$stateParams', function($scope, $state, Auth, $location, ExcusesAPI, CommentsAPI, UsersAPI, FavoritesAPI,  $stateParams){
@@ -274,16 +277,15 @@ angular.module('AppCtrl', ['AppServices'])
         comment: ''
     };
  
-CommentsAPI.getComment($stateParams.id)
-.then(function success(res){
-    console.log(res);
-    $scope.comment = res.data; 
+    CommentsAPI.getComment($stateParams.id)
+    .then(function success(res){
+        console.log(res);
+        $scope.comment = res.data; 
+    }, function error(err){
+        console.log(err)
+    })
 
-}, function error(err){
-    console.log(err)
-})
-
- $scope.updateComment = function() {
+    $scope.updateComment = function() {
     CommentsAPI.updateComment($stateParams.id, $scope.comment)
     .then(function success(res){
         console.log(res);
@@ -291,8 +293,7 @@ CommentsAPI.getComment($stateParams.id)
         console.log($scope.comment);
         $location.path('/excuse/:id');
     }, function error(err) {
-         console.log("Error", err);
-    });
-
+        console.log("Error", err);
+        });
     }
 }]);
