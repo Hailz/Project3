@@ -113,7 +113,6 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Get dat user " + user.data.name, "phone number: " + user.data.number)
         $scope.number = user.data.number
     })
-
     $scope.sendMsg = function(message, number) {
         Message.sendMessage(message, number).then(function success(res) {
             console.log("it's working, people " + res)
@@ -193,7 +192,11 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.createComment = function() {    
         CommentsAPI.createComment($scope.newComment)
         .then(function success(res) {
-            console.log("Comment added!", $scope.newComment, res.data, $scope.comments, $scope.comments._id);
+            // console.log("Comment added!", $scope.newComment, res.data, $scope.comments, $scope.comments._id);
+            console.log(res.data);
+            $scope.comments.push(res.data);
+            $scope.newComment = {};
+            console.log($scope.comments);
         }, function error(err) {
             console.log("Create Comment Error", err);
             });
@@ -208,15 +211,38 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Delete Comment Error", err);
             });
     };
-
-    $scope.updateComment = function(commentId, $index) {
-    CommentsAPI.updateComment(commentId)
-        .then(function success(res) {
-            $state.go("comment", {id: $stateParams.id});
-            console.log("Comment Updated", res);
-            }, function error(err) {
-            console.log("Update Comment Error", err);
-        });
+}])
+.controller('EditCommentCtrl', ['$scope', '$state', 'Auth', '$location', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', 'FavoritesAPI', '$stateParams', function($scope, $state, Auth, $location, ExcusesAPI, CommentsAPI, UsersAPI, FavoritesAPI,  $stateParams){
+    $scope.comment = {
+        comment: ''
     };
+    // console.log($stateParams);
+ 
+CommentsAPI.getComment($stateParams.id)
+.then(function success(res){
+    console.log(res);
+    $scope.comment = res.data; 
+
+}, function error(err){
+    console.log(err)
+})
+
+ $scope.updateComment = function() {
+    CommentsAPI.updateComment($stateParams.id, $scope.comment)
+    .then(function success(res){
+        console.log(res);
+        $scope.comment = res.data; 
+        console.log($scope.comment);
+        $location.path('/excuse/:id');
+        // $location(); 
+        // console.log('you can update your comment');
+    }, function error(err) {
+         console.log("Error", err);
+
+    });
+
+    }
+        
+
 
 }]);

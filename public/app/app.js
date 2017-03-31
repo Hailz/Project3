@@ -37,6 +37,11 @@ app.config([
         templateUrl: 'app/views/favorites.html',
         controller: 'FavoritesCtrl'
     })
+    .state('editcomment', {
+        url: '/editcomment/:id',
+        templateUrl: 'app/views/editComment.html',
+        controller: 'EditCommentCtrl'
+    })
     .state('excuse', {
         url: '/excuse/:id',
         templateUrl: 'app/views/excuse.html',
