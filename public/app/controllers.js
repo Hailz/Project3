@@ -55,7 +55,9 @@ angular.module('AppCtrl', ['AppServices'])
     }
 
     $scope.deleteProfile = function(id){
+        console.log(id)
         UsersAPI.deleteProfile(id).then(function success(res){
+            Auth.removeToken();
             $location.path('/');
         }, function error(err){
             console.log(err)

@@ -1,4 +1,4 @@
-<div class="form-group input-group">
+<div class="form-group input-group text-center">
   <label>Refine your lie...</label>
   <input type='text' class="form-control" id="search" ng-model='search' placeholder="Enter lie key word">
 </div>
@@ -8,9 +8,11 @@
 		<div class="excuse-card">
       <a ng-href="/excuse/{{excuse._id}}">
       <h4 class="card-title">{{excuse.excuse}}</h4>
+      
       </a>
       <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>		
 		</div>
+    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
 	</div>
 </div>
@@ -23,6 +25,7 @@
       </a>
       <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>   
     </div>
+    <h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
 
   </div>
 </div>

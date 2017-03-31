@@ -104,12 +104,12 @@ return {
             .then(function success(res){
                 return res.data
             }, function error(err){
-                return console.log("Faaaaaailed to update " + err)
+                return console.log(err)
             })
         },
         deleteProfile: function(profile){
-            console.log("BUH BYE Profile id: " + profile._id)
-            return $http.delete('/api/users/' + profile._id)
+            console.log("BUH BYE Profile id: " + profile)
+            return $http.delete('/api/users/' + profile)
             .then(function success(res){
                 return res.data
             }, function error(err){
