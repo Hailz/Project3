@@ -252,7 +252,7 @@ angular.module('AppCtrl', ['AppServices'])
         .then(function success(res) {
             $scope.comments.push(res.data);
             // $scope.newComment = {};
-            // $location.path('/excuse/');
+            $location.path("/excuse/" + $scope.excuse._id);
         }, function error(err) {
             console.log("Create Comment Error", err);
             });
