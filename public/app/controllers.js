@@ -206,7 +206,7 @@ angular.module('AppCtrl', ['AppServices'])
          for(var i = 0; i < $scope.tempcomments.length; i++) {
                 if ($scope.tempcomments[i].excuseId == $scope.excuse._id) {
                     $scope.comments.push($scope.tempcomments[i]);
-
+                    $scope.comments = $scope.comments.reverse(); 
                 }
             }
     }, function error(err) {
@@ -251,6 +251,7 @@ angular.module('AppCtrl', ['AppServices'])
         CommentsAPI.createComment($scope.newComment)
         .then(function success(res) {
             $scope.comments.push(res.data);
+            $scope.comments = $scope.comments.reverse(); 
             // $scope.newComment = {};
             $location.path("/excuse/" + $scope.excuse._id);
         }, function error(err) {
