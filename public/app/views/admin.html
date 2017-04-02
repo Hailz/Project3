@@ -1,9 +1,15 @@
 <h1>Welcome Admin!</h1>
 
-<form ng-submit='addExcuse()'>
-  <label>Excuse:</label>
-  <input ng-model='newExcuse.excuse' type="text" name="excuse" placeholder="Excuse">
-  <label>Excuse Message:</label>
-  <input ng-model='newExcuse.excuseMsg' type="text" name="excuseMsg" placeholder="Text Message For Excuse">
-  <input type="submit" class="btn">
-</form>
+<div ng-hide='Admin()'>
+  <h2>This page is for Admins only. If you feel you have reached this message inaccurately please contact someone that gives a damn.</h2>
+</div>
+
+<content ng-show='Admin()'>
+  <form ng-submit='addExcuse()'>
+    <label>Excuse:</label>
+    <input ng-model='newExcuse.excuse' type="text" name="excuse" placeholder="Excuse">
+    <label>Excuse Message:</label>
+    <input ng-model='newExcuse.excuseMsg' type="text" name="excuseMsg" placeholder="Text Message For Excuse">
+    <input type="submit" class="btn">
+  </form>
+</content>
