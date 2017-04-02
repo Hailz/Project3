@@ -5,26 +5,27 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 section{
   background-color: white;
   padding-top: 20px;
   padding-bottom: 15px;
 }
-
 label {
   color: white;
-  font-size: 48px;
+  font-size: 35px;
 }
 a{
   color: white;
   text-decoration: none;
 }
-
 .navbar{
   margin-bottom: 1px;
 }
 
+.brandName{
+  font-family: 'Lobster', cursive;
+  font-size: 65px;
+}
 .heroSection{
   padding-bottom: 30px;
   background-color: #232323;
@@ -32,9 +33,6 @@ a{
   color: white;
   text-align: center;
 }
-
-
-
 .container-fluid{
   padding: 0px;
 }
@@ -52,7 +50,6 @@ a{
   display: inline-block;
 /*  text-align: center;*/
 }
-
 button {
   position: relative;
   display: inline-block;
@@ -86,7 +83,6 @@ button {
     -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
     transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
 }
-
 button:active {
   position: relative;
   display: inline-block;
@@ -120,6 +116,7 @@ button:active {
     -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
     transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
 }
+
 
 
 
