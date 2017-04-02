@@ -1,20 +1,122 @@
 body{
-  background-color: #504C4C;
+  background-color: #ffffff;
   color: #95989A;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+section{
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+label {
+  color: white;
+  font-size: 48px;
 }
 a{
   color: white;
   text-decoration: none;
 }
+
+.navbar{
+  margin-bottom: 1px;
+}
+
+.searchSection{
+  padding-bottom: 30px;
+  background-color: #232323;
+}
+
+.container-fluid{
+  padding: 0px;
+}
 .excuse-card{
   width: 100px;
   height: 166px;
   border-radius: 5%;
-  background-color: black;
-  color: white;
+  border-color: #000000;
+  background-color: #000000;
+  color: #ffffff;
   margin: 0, auto;
+  padding: 1rem;
+  min-height: 16rem;
+  position: relative;
+  display: inline-block;
 /*  text-align: center;*/
 }
+
+button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: #232323;
+  outline: none;
+  border: 2px solid #232323;
+  background-color: white;
+  white-space: nowrap;
+/*  appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-box-shadow: inset 0 -4px 0 0 #232323;
+    -webkit-box-shadow: inset 0 -4px 0 0 #232323;*/
+  box-shadow: inset 0 -4px 0 0 #232323;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+  border-radius: 7px;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  padding: 14px 20px 18px;
+  padding: 0.5rem 1.25rem 1.125rem;
+  min-width: 225px;
+  min-width: 5.0625rem;
+/*    -moz-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    -o-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
+}
+
+button:active {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: #232323;
+  outline: none;
+/*  border: 2px solid #232323;*/
+  background-color: #ffffff;
+  white-space: nowrap;
+  appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-box-shadow: inset 0 -4px 0 0 #232323;
+    -webkit-box-shadow: inset 0 -4px 0 0 #232323;
+/*  box-shadow: inset 0 -4px 0 0 #232323;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;*/
+  /*border-radius: 7px;*/
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+/*  padding: 20px 20px 18px;
+  padding: 0.875rem 1.25rem 1.125rem;*/
+/*  min-width: 225px;
+  min-width: 14.0625rem;*/
+/*    -moz-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    -o-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
+}
+
+
 
 
 

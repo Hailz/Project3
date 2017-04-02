@@ -37,6 +37,8 @@ app.use('/twilioClient', require('./controllers/twilioClient'));
 app.use('/api/favorites', require('./controllers/favorites'));
 
 
+
+
 // this middleware will check if expressJWT did not authorize the user, and return a message
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
