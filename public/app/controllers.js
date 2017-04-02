@@ -130,7 +130,7 @@ angular.module('AppCtrl', ['AppServices'])
         })
     }
 }])
-.controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
+.controller('NavCtrl', ['$scope', 'Auth', '$location', 'UsersAPI', function($scope, Auth, $location, UsersAPI) {
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
     }
@@ -139,6 +139,19 @@ angular.module('AppCtrl', ['AppServices'])
         Auth.removeToken();
         console.log("After Logout", Auth.getToken());
         $location.path("/login");
+    };
+    $scope.tempUser = Auth.currentUser();
+    var curUser = $scope.tempUser.id;
+    
+    console.log(UsersAPI.getUser(curUser))
+    UsersAPI.getUser(curUser).then(function(user){
+        console.log("phone number: " + user.data.number)
+        $scope.number = user.data.number
+    });
+    $scope.Admin = function(){
+        if ($scope.number == +14252238606){
+            return true;
+        }
     };
 }])
 .controller('HomeCtrl', ['$scope', '$location', '$http', 'Message', 'ExcusesAPI', 'Auth', 'UsersAPI', function($scope, $location, $http, Message, ExcusesAPI, Auth, UsersAPI) {
@@ -301,4 +314,26 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Error", err);
         });
     }
+}])
+.controller('AdminCtrl', ['$scope', '$state', 'Auth', 'ExcusesAPI', function($scope, $state, Auth, ExcusesAPI){
+    $scope.newExcuse = {
+        excuse: '',
+        excuseMsg: '',
+        rating: 0
+    }
+
+    $scope.addExcuse = function(){
+        ExcusesAPI.addExcuse($scope.newExcuse)
+        .then(function success(res){
+            console.log("Yaaaas", res);
+            $scope.newExcuse = {
+                excuse: '',
+                excuseMsg: '',
+                rating: 0
+            }
+        }, function error(err){
+            console.log("Fudge. ", err);
+        });
+    }
+
 }]);

@@ -61,6 +61,9 @@ angular.module('AppServices', ['ngResource'])
         getExcuse: function(id){
             return $http.get('/api/excuses/'+id);
         },
+        addExcuse: function(newExcuse){
+            return $http.post('/api/excuses', newExcuse)
+        },
         updateExcuse: function(excuse){
              console.log("id is: " + excuse._id, "rating is " + excuse.rating)
             return $http.put('api/excuses/'+ excuse._id, excuse)
@@ -86,7 +89,7 @@ return {
         updateComment: function(id, comment) {
             return $http.put('/api/comments/'+ id, comment)
 
-            }, 
+        }, 
         deleteComment: function(id) {
             return $http.delete('/api/comments/' + id)
             .then(function success(res){

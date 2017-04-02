@@ -13,6 +13,11 @@ app.config([
         templateUrl: 'app/views/home.html',
         controller: 'HomeCtrl'
     })
+    .state('admin', {
+        url: '/admin',
+        templateUrl: 'app/views/admin.html',
+        controller: 'AdminCtrl'
+    })
     .state('signup', {
         url: '/signup',
         templateUrl: 'app/views/userSignup.html',

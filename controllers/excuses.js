@@ -9,6 +9,12 @@ router.route('/')
       return res.send(excuses);
     });
   })
+  .post(function(req, res){
+    Excuses.create(req.body, function(err, excuse){
+    if (err) return res.status(500).send(err);
+    return res.send(excuse);
+    });
+  });
 
 router.route('/:id')
   .get(function(req, res){
