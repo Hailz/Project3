@@ -25,10 +25,15 @@ a{
   margin-bottom: 1px;
 }
 
-.searchSection{
+.heroSection{
   padding-bottom: 30px;
   background-color: #232323;
+  display: flex;
+  color: white;
+  text-align: center;
 }
+
+
 
 .container-fluid{
   padding: 0px;
@@ -90,7 +95,7 @@ button:active {
   font-weight: bold;
   color: #232323;
   outline: none;
-/*  border: 2px solid #232323;*/
+  border: 1px solid #232323;
   background-color: #ffffff;
   white-space: nowrap;
   appearance: none;
