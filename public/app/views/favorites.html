@@ -1,14 +1,17 @@
-<h1>Favorites:</h1>
-<div ng-hide='isLoggedIn()'>
-  <h2>Please create an account or log in to save and see favorites!</h2>
+<div class="row heroSection text-center">
+  <div class="col-xs-6 col-xs-offset-3">
+    <h1>Favorites</h1>
+    <div ng-hide='isLoggedIn()'>
+      <h2>Please create an account or log in to save and see favorites!</h2>
+    </div> 
+  </div>
 </div>
+<section>
 <div class="row" ng-show='isLoggedIn()'>
   <div class="col-sm-4" ng-repeat="excuse in excuses | filter: search track by excuse._id">
-
     <div class="excuse-card">
       <a ng-href="/excuse/{{excuse._id}}">
       <h4 class="card-title">{{excuse.excuse}}</h4>
-
       </a>
       <button ng-click="sendMsg(excuse.excuseMsg, number)">Text Me</button>  
     </div>
@@ -16,3 +19,4 @@
     <button ng-click="deleteFav(excuse._id)" class="btn btn-danger">X</button>
   </div>
 </div>
+</section>
