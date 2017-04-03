@@ -314,6 +314,7 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.comment = {
         comment: ''
     };
+    $scope.excuse = 
  
     CommentsAPI.getComment($stateParams.id)
     .then(function success(res){
@@ -326,10 +327,8 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.updateComment = function() {
     CommentsAPI.updateComment($stateParams.id, $scope.comment)
     .then(function success(res){
-        console.log(res);
         $scope.comment = res.data; 
-        console.log($scope.comment);
-        $location.path('/excuse/:id');
+        $location.path("/excuse/" + $scope.comment.excuseId);
     }, function error(err) {
         console.log("Error", err);
         });
