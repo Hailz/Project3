@@ -10,13 +10,23 @@ section{
   padding-top: 20px;
   padding-bottom: 15px;
 }
-label {
-  color: white;
-  font-size: 35px;
-}
 a{
   color: white;
   text-decoration: none;
+}
+h3, p{
+  color: #000000;
+}
+.commentHeader{
+  color: #000000;
+}
+.tagLine {
+  color: white;
+  font-size: 35px;
+}
+.excuseDetailbtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .navbar{
   margin-bottom: 1px;
