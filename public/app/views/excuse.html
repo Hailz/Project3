@@ -48,8 +48,8 @@
 						
 							<p>{{ c.comment }}</p>
 							<p>{{ c.commentAuthor }}</p>
-							<a class="btn btn-warning btn-xs" ng-href="/editcomment/{{c._id}}">Edit</a>
-							<a class="btn btn-danger btn-xs" ng-click="deleteComment(c._id, $index)">Delete</a>
+							<a class="btn btn-warning btn-xs" ng-if="c.commentAuthor == user.name" ng-href="/editcomment/{{c._id}}">Edit</a>
+							<a class="btn btn-danger btn-xs" ng-if="c.commentAuthor == user.name" ng-click="deleteComment(c._id, $index)">Delete</a>
 					</div>
 			</div>
 		</div>
