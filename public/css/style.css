@@ -10,6 +10,13 @@ section{
   padding-top: 20px;
   padding-bottom: 15px;
 }
+footer{
+    background-color: #232323;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 a{
   color: white;
   text-decoration: none;
