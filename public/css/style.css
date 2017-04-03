@@ -17,6 +17,9 @@ a{
 h3, p{
   color: #000000;
 }
+h6{
+  padding: 0 2px;
+}
 .commentHeader{
   color: #000000;
 }
