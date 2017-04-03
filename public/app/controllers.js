@@ -43,10 +43,7 @@ angular.module('AppCtrl', ['AppServices'])
 
     $scope.tempUser = Auth.currentUser();
     var curUser = $scope.tempUser.id;
-    console.log("User id " + curUser)
-    console.log(UsersAPI.getUser(curUser))
     UsersAPI.getUser(curUser).then(function(user){
-        console.log("Get dat user id: " + user.data.id)
         $scope.user = user.data
     })
 
@@ -60,7 +57,6 @@ angular.module('AppCtrl', ['AppServices'])
     }
 
     $scope.deleteProfile = function(id){
-        console.log(id)
         UsersAPI.deleteProfile(id).then(function success(res){
             Auth.removeToken();
             $location.path('/');
@@ -82,7 +78,6 @@ angular.module('AppCtrl', ['AppServices'])
 
     $scope.tempUser = Auth.currentUser();
     $scope.userId = $scope.tempUser.id;
-    console.log("User id " + $scope.userId)
 
     UsersAPI.getUser($scope.userId).then(function(user){
         $scope.number = user.data.number
@@ -110,11 +105,11 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Error", err);
     })
     }, function error(err){
-        console.log("Boooooo", err)
+        console.log("Error", err)
     })
 
     $scope.deleteFav = function(id){
-        console.log("Excuse ID is: ", id)
+      
         FavoritesAPI.deleteFavorite(id).then(function success(res){
             $location.path('/');
         }, function error(err){
@@ -150,6 +145,7 @@ angular.module('AppCtrl', ['AppServices'])
         $scope.number = user.data.number
     });
     $scope.Admin = function(){
+        console.log($scope.number + " VS 14252238606")
         if (($scope.number == +14252238606) || ($scope.number == +12063840852)){
             return true;
         } else {
@@ -191,10 +187,10 @@ angular.module('AppCtrl', ['AppServices'])
     })
     $scope.sendMsg = function(message, number) {
         Message.sendMessage(message, number).then(function success(res) {
-            console.log("it's working, people " + res)
+            console.log("it's working " + res)
         },
         function error(err){
-            console.log("it's not working, people " + err)
+            console.log("it's not working" + err)
         })
     }
 }])
@@ -214,10 +210,10 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.writeExcuse = function() {
         console.log('HERE ' + $scope.userExcuse, $scope.number)
         Message.sendMessage($scope.userExcuse, $scope.number).then(function success(res) {
-            console.log("it's working, people " + res)
+            console.log("it's working" + res)
         },
         function error(err){
-            console.log("it's not working, people " + err)
+            console.log("it's not working" + err)
         })
     }
 
@@ -264,7 +260,7 @@ angular.module('AppCtrl', ['AppServices'])
        ExcusesAPI.updateExcuse($scope.excuse).then(function success(res){
         console.log('update it ' + res)
        }, function error(err){
-        console.log("Faaaaail " + err)
+        console.log("Fail " + err)
        })
     };
     $scope.dislike = function(){
@@ -272,7 +268,7 @@ angular.module('AppCtrl', ['AppServices'])
         ExcusesAPI.updateExcuse($scope.excuse).then(function success(res){
         console.log('update it ' + res)
        }, function error(err){
-        console.log("Faaaaail " + err)
+        console.log("Fail " + err)
        })
     };
     $scope.addFavorite = function(){
@@ -318,6 +314,7 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.comment = {
         comment: ''
     };
+    $scope.excuse = 
  
     CommentsAPI.getComment($stateParams.id)
     .then(function success(res){
@@ -330,10 +327,8 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.updateComment = function() {
     CommentsAPI.updateComment($stateParams.id, $scope.comment)
     .then(function success(res){
-        console.log(res);
         $scope.comment = res.data; 
-        console.log($scope.comment);
-        $location.path('/excuse/:id');
+        $location.path("/excuse/" + $scope.comment.excuseId);
     }, function error(err) {
         console.log("Error", err);
         });

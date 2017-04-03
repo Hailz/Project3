@@ -4,37 +4,36 @@
 	</div> 
 </div>
 
-<section></section>
+<section>
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-xs-4">
+	</div>	
+	<div class="col-xs-4 text-center ">
 		<div class="excuse-card">
-
 			<h4 class="card-title">{{excuse.excuse}}</h4>
 			<h5>Rating: {{excuse.rating}}</h5>
-
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-2 col-xs-offset-1  text-center ">
-						<button ng-click='like()' type="button" class="btn btn-success">&#10004 Like</button>
-					</div>
-					<div ng-show="isLoggedIn()" class="col-xs-2 text-center ">
-						<button ng-click='addFavorite()' type="button" class="btn btn-warning">&#9733 Favorite</button>
-					</div>
-					<div class="col-xs-2 text-center ">
-						<button ng-click='dislike()' type="button" class="btn btn-danger">&#10008 Dislike</button>
-					</div>
-				</div>
-			</div>			
 		</div>
 		<h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
-    </div>
+	</div>
+</div>					
+
+<div class="row">
+	<div class="col-xs-4">
+	</div>	
+		<div ng-show="isLoggedIn()" class="col-xs-4 text-center ">
+			<button ng-click='like()' type="button" class="btn-success excuseDetailbtn">&#10004 Like</button>
+			<button ng-click='addFavorite()' type="button" class="btn-warning excuseDetailbtn">&#9733 Favorite</button>
+			<button ng-click='dislike()' type="button" class="btn-danger excuseDetailbtn">&#10008 Dislike</button>
+		</div>
+	<div class="col-xs-4">
+	</div>	
 </div>
 
 <div class="content">
 	<div class="container">
 		<div class="row">
 			<div ng-show="isLoggedIn()">
-				<h4>How did it work for you?</h4>	
+				<h4 class="commentHeader">How did it work for you?</h4>	
 				<form ng-submit="createComment()">
 					<div class="form-group">
 						<label for="comment" >Comment: </label>
@@ -49,8 +48,8 @@
 						
 							<p>{{ c.comment }}</p>
 							<p>{{ c.commentAuthor }}</p>
-							<a class="btn btn-warning btn-xs" ng-href="/editcomment/{{c._id}}">Edit</a>
-							<a class="btn btn-danger btn-xs" ng-click="deleteComment(c._id, $index)">Delete</a>
+							<a class="btn btn-warning btn-xs" ng-if="c.commentAuthor == user.name" ng-href="/editcomment/{{c._id}}">Edit</a>
+							<a class="btn btn-danger btn-xs" ng-if="c.commentAuthor == user.name" ng-click="deleteComment(c._id, $index)">Delete</a>
 					</div>
 			</div>
 		</div>
