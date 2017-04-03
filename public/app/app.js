@@ -18,6 +18,11 @@ app.config([
         templateUrl: 'app/views/admin.html',
         controller: 'AdminCtrl'
     })
+    .state('writeYourOwn', {
+        url: '/write',
+        templateUrl: 'app/views/writeYourOwn.html',
+        controller: 'WriteCtrl'
+    })
     .state('signup', {
         url: '/signup',
         templateUrl: 'app/views/userSignup.html',
