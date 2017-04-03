@@ -151,7 +151,7 @@ angular.module('AppCtrl', ['AppServices'])
     });
     $scope.Admin = function(){
         console.log($scope.number + " VS 14252238606")
-        if ($scope.number == '14252238606') || ($scope.number == '12063840852'){
+        if ($scope.number == ('14252238606' || "12063840852")){
             return true;
         } else {
             return false;
