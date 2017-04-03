@@ -163,10 +163,8 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.allExcuses = [];
     $scope.excuses = [];
 
-
     ExcusesAPI.getAllExcuses()
     .then(function success(res) {
-        console.log('in excuses API then promise', res)
         $scope.allExcuses = res.data;
         $scope.temp = $scope.allExcuses.sort(function(){
             return 0.5 - Math.random()
@@ -189,10 +187,7 @@ angular.module('AppCtrl', ['AppServices'])
 
     $scope.tempUser = Auth.currentUser();
     var curUser = $scope.tempUser.id;
-    console.log("User id " + curUser)
-    console.log(UsersAPI.getUser(curUser))
     UsersAPI.getUser(curUser).then(function(user){
-        console.log("Get dat user " + user.data.name, "phone number: " + user.data.number)
         $scope.number = user.data.number
     })
     $scope.sendMsg = function(message, number) {
@@ -203,6 +198,31 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("it's not working, people " + err)
         })
     }
+}])
+.controller('WriteCtrl', ['$scope', '$location', '$http', 'Message', 'Auth', 'UsersAPI', function($scope, $location, $http, Message, Auth, UsersAPI){
+    $scope.userExcuse = '';
+    $scope.tempUser = Auth.currentUser();
+    var curUser = $scope.tempUser.id;
+
+    $scope.isLoggedIn = function() {
+        return Auth.isLoggedIn();
+    }
+  
+    UsersAPI.getUser(curUser).then(function(user){
+        console.log("phone number: " + user.data.number)
+        $scope.number = user.data.number
+    })
+    $scope.writeExcuse = function() {
+        console.log('HERE ' + $scope.userExcuse, $scope.number)
+        Message.sendMessage($scope.userExcuse, $scope.number).then(function success(res) {
+            console.log("it's working, people " + res)
+        },
+        function error(err){
+            console.log("it's not working, people " + err)
+        })
+    }
+
+
 }])
 .controller('CommentCtrl', ['$scope', '$location', '$http', 'Auth', 'ExcusesAPI', 'CommentsAPI', 'UsersAPI', 'FavoritesAPI', '$stateParams', function($scope, $location, $http, Auth, ExcusesAPI, CommentsAPI, UsersAPI, FavoritesAPI,  $stateParams){
     $scope.excuse = {};
