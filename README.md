@@ -1,4 +1,5 @@
 # Project3
+http://excuse-me.herokuapp.com/
 ~ Hailey & Joe ~
 
 #Technical Requirements
@@ -33,6 +34,13 @@
   * Twilio API
 
 # Installation Instructions:
+
+  * Fork and clone the reapo. 
+  * Run npm install to install the dependencies.
+  * Create a .env with your Twilio auth token, Twilio account SID, Twilio number, and set SECRET = to a unique password
+  * In the controllers section, under the AdminCtrl and NavCtrl change the phone numbers to your number/numbers
+  * Add excuses to the excuses database.
+  * Have fun!
 
 # User Stories:
 

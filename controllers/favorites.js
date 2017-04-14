@@ -6,7 +6,6 @@ router.route('/')
   .get(function(req, res){
     Favorites.find(function(err, favorites) {
       if (err) return res.status(500).send(err);
-
       return res.send(favorites);
   });
 })  
@@ -26,5 +25,6 @@ router.route('/:id').delete(function(req, res){
     return res.send({message: 'Favorite Deleted'})
   })
 })
+
 
 module.exports = router;

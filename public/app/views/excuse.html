@@ -17,8 +17,11 @@
 					<div class="col-xs-2 col-xs-offset-1  text-center ">
 						<button ng-click='like()' type="button" class="btn btn-success">&#10004 Like</button>
 					</div>
-					<div ng-show="isLoggedIn()" class="col-xs-2 text-center ">
+					<div ng-show="isLoggedIn() && isFavorite()" class="col-xs-2 text-center">
 						<button ng-click='addFavorite()' type="button" class="btn btn-warning">&#9733 Favorite</button>
+					</div>
+					<div ng-show="isLoggedIn()" ng-hide="isFavorite()"" class="col-xs-2 text-center">
+						<button ng-click="deleteFav(excuse._id)" class="btn btn-danger">Unfavorite</button>
 					</div>
 					<div class="col-xs-2 text-center ">
 						<button ng-click='dislike()' type="button" class="btn btn-danger">&#10008 Dislike</button>

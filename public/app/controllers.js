@@ -1,5 +1,6 @@
 angular.module('AppCtrl', ['AppServices'])
 .controller('SignupCtrl', ['$scope', '$http', '$state', 'Auth', function($scope, $http, $state, Auth) {
+    
     $scope.user = {
         email: '',
         password: '',
@@ -121,6 +122,7 @@ angular.module('AppCtrl', ['AppServices'])
             console.log("Nope "+err);
         })
     }
+
     $scope.sendMsg = function(message, number) {
         Message.sendMessage(message, number).then(function success(res) {
             console.log("it's working, people " + res)
@@ -132,6 +134,7 @@ angular.module('AppCtrl', ['AppServices'])
 }])
 .controller('NavCtrl', ['$scope', 'Auth', '$location', 'UsersAPI', function($scope, Auth, $location, UsersAPI) {
     $scope.number
+
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
@@ -227,6 +230,9 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.excuse = {};
     $scope.user = Auth.currentUser();
     $scope.comments = [];
+    $scope.allFavorites = [];
+    $scope.favorites = [];
+    $scope.favorited = [];
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
@@ -244,6 +250,7 @@ angular.module('AppCtrl', ['AppServices'])
     }, function error(err){
         console.log(err)
     });
+
     CommentsAPI.getAllComments()
     .then(function success(res) {
         $scope.tempcomments = res.data;
@@ -258,6 +265,24 @@ angular.module('AppCtrl', ['AppServices'])
     }, function error(err) {
         console.log("Error", err);
     });
+
+    FavoritesAPI.getFavorites().then(function success(res){
+        $scope.allFavorites = res.data
+        for (var i = 0; i < $scope.allFavorites.length; i++){
+            if ($scope.allFavorites[i].userId == $scope.userId){
+                $scope.favorites.push($scope.allFavorites[i])
+            }
+        }
+    }, function error(err){
+        console.log("Boooooo", err)
+    })
+
+    $scope.isFavorite = function(){
+        $scope.favorited = $scope.favorites.filter($scope.excuse._id)
+        if ($scope.favorited){
+            return true;
+        }
+    }
 
     $scope.like = function(){
        rating = $scope.excuse.rating++
@@ -275,6 +300,7 @@ angular.module('AppCtrl', ['AppServices'])
         console.log("Faaaaail " + err)
        })
     };
+
     $scope.addFavorite = function(){
         console.log("Excuse id: " + $scope.excuse._id, "User id: " + $scope.user.id)
         $scope.newFavorite = {
@@ -285,10 +311,19 @@ angular.module('AppCtrl', ['AppServices'])
         FavoritesAPI.addFavorite($scope.newFavorite)
         .then(function success(res){
             console.log("Add favorite " + res)
-            $location.path('/');
+            $location.path('/favorites');
         }, function error(err){
             console.log("Favorite add failed.")
-        })
+        });
+    };
+
+    $scope.deleteFav = function(id){
+        console.log("Excuse ID is: ", id)
+        FavoritesAPI.deleteFavorite(id).then(function success(res){
+            $location.path('/favorites');
+        }, function error(err){
+            console.log("Nope "+err);
+        });
     };
 
     $scope.createComment = function() {  
@@ -297,7 +332,12 @@ angular.module('AppCtrl', ['AppServices'])
         .then(function success(res) {
             $scope.comments.push(res.data);
             $scope.comments = $scope.comments.reverse(); 
-            // $scope.newComment = {};
+            $scope.newComment = {
+                excuseId: $scope.excuse._id,
+                comment: '',
+                commentAuthor: $scope.user.name,
+                userId: $scope.user.id
+            }
             $location.path("/excuse/" + $scope.excuse._id);
         }, function error(err) {
             console.log("Create Comment Error", err);
