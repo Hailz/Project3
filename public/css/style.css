@@ -5,26 +5,59 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 section{
   background-color: white;
   padding-top: 20px;
   padding-bottom: 15px;
 }
-
-label {
-  color: white;
-  font-size: 48px;
+footer{
+    background-color: #232323;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 a{
   color: white;
   text-decoration: none;
 }
-
+h3{
+  color: #ffffff;
+}
+p
+h6{
+  padding: 0 2px;
+}
+div.formBackground{
+  background-color: #232323;
+  margin: 0;
+  padding-bottom: 50%;
+}
+.commentHeader{
+  color: #000000;
+}
+.profileH3{
+  margin-top: 0px;
+}
+.writeYrOwn{
+  color: #000000;
+}
+.tagLine {
+  color: white;
+  font-size: 35px;
+}
+.excuseDetailbtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .navbar{
   margin-bottom: 1px;
 }
 
+.brandName{
+  font-family: 'Lobster', cursive;
+  font-size: 65px;
+}
 .heroSection{
   padding-bottom: 30px;
   background-color: #232323;
@@ -32,15 +65,12 @@ a{
   color: white;
   text-align: center;
 }
-
-
-
 .container-fluid{
   padding: 0px;
 }
 .excuse-card{
-  width: 100px;
-  height: 166px;
+  width: 132px;
+  height: 220px;
   border-radius: 5%;
   border-color: #000000;
   background-color: #000000;
@@ -50,9 +80,7 @@ a{
   min-height: 16rem;
   position: relative;
   display: inline-block;
-/*  text-align: center;*/
 }
-
 button {
   position: relative;
   display: inline-block;
@@ -64,11 +92,6 @@ button {
   border: 2px solid #232323;
   background-color: white;
   white-space: nowrap;
-/*  appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -moz-box-shadow: inset 0 -4px 0 0 #232323;
-    -webkit-box-shadow: inset 0 -4px 0 0 #232323;*/
   box-shadow: inset 0 -4px 0 0 #232323;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
@@ -81,12 +104,7 @@ button {
   padding: 0.5rem 1.25rem 1.125rem;
   min-width: 225px;
   min-width: 5.0625rem;
-/*    -moz-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    -o-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
 }
-
 button:active {
   position: relative;
   display: inline-block;
@@ -103,23 +121,12 @@ button:active {
     -webkit-appearance: none;
     -moz-box-shadow: inset 0 -4px 0 0 #232323;
     -webkit-box-shadow: inset 0 -4px 0 0 #232323;
-/*  box-shadow: inset 0 -4px 0 0 #232323;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;*/
-  /*border-radius: 7px;*/
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 18px;
   line-height: 1.125rem;
-/*  padding: 20px 20px 18px;
-  padding: 0.875rem 1.25rem 1.125rem;*/
-/*  min-width: 225px;
-  min-width: 14.0625rem;*/
-/*    -moz-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    -o-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    -webkit-transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-    transition: width 0.2s ease, color 0.3s ease, border-color 0.3s ease;*/
 }
+
 
 
 
