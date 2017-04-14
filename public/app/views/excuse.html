@@ -11,24 +11,7 @@
 	<div class="col-xs-4 text-center ">
 		<div class="excuse-card">
 			<h4 class="card-title">{{excuse.excuse}}</h4>
-			<h5>Rating: {{excuse.rating}}</h5>
-
-<!-- 			<div class="container">
-				<div class="row">
-					<div class="col-xs-2 col-xs-offset-1  text-center ">
-						<button ng-click='like()' type="button" class="btn btn-success">&#10004 Like</button>
-					</div>
-					<div ng-show="isLoggedIn() && isFavorite()" class="col-xs-2 text-center">
-						<button ng-click='addFavorite()' type="button" class="btn btn-warning">&#9733 Favorite</button>
-					</div>
-					<div ng-show="isLoggedIn()" ng-hide="isFavorite()" class="col-xs-2 text-center">
-						<button ng-click="deleteFav(excuse._id)" class="btn btn-danger">Unfavorite</button>
-					</div>
-					<div class="col-xs-2 text-center ">
-						<button ng-click='dislike()' type="button" class="btn btn-danger">&#10008 Dislike</button>
-					</div>
-				</div>
-			</div>	 -->		
+			<h5>Rating: {{excuse.rating}}</h5>	
 
 		</div>
 		<h6>Text Message Preview: {{excuse.excuseMsg}}</h6>
@@ -40,8 +23,8 @@
 	</div>	
 		<div ng-show="isLoggedIn()" class="col-xs-4 text-center ">
 			<button ng-click='like()' type="button" class="btn-success excuseDetailbtn">&#10004 Like</button>
-			<button ng-click='addFavorite()' ng-show='isFavorite()' type="button" class="btn-warning excuseDetailbtn">&#9733 Favorite</button>
-			<button ng-click="deleteFav(excuse._id)" ng-hide="isFavorite()" class="btn btn-danger">Unfavorite</button>
+			<button ng-click='addFavorite()' ng-hide='isFavorite()' type="button" class="btn-warning excuseDetailbtn">&#9733 Favorite</button>
+			<button ng-click="deleteFav(excuse._id)" ng-show="isFavorite()" class="btn btn-danger">Unfavorite</button>
 			<button ng-click='dislike()' type="button" class="btn-danger excuseDetailbtn">&#10008 Dislike</button>
 		</div>
 	<div class="col-xs-4">

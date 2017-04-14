@@ -13,7 +13,7 @@ angular.module('AppCtrl', ['AppServices'])
                 Auth.saveToken(res.data.token);
                 $state.go("home")
             }, function error(err) {
-                console.log("Uh oh. Login Failed.")
+                console.log("Login Failed.")
             })
         }, function error(err) {
         console.log("Error", err)
@@ -30,7 +30,7 @@ angular.module('AppCtrl', ['AppServices'])
             Auth.saveToken(res.data.token);
             $state.go("home")
         }, function error(err) {
-            console.log("Uh oh. Login Failed.")
+            console.log("Login Failed.")
         })
         }
 }])
@@ -114,16 +114,16 @@ angular.module('AppCtrl', ['AppServices'])
         FavoritesAPI.deleteFavorite(id).then(function success(res){
             $location.path('/');
         }, function error(err){
-            console.log("Nope "+err);
+            console.log("Delete favorite failed. "+err);
         })
     }
 
     $scope.sendMsg = function(message, number) {
         Message.sendMessage(message, number).then(function success(res) {
-            console.log("it's working, people " + res)
+            console.log("Message sent. " + res)
         },
         function error(err){
-            console.log("it's not working, people " + err)
+            console.log("Message not sent. " + err)
         })
     }
 }])
@@ -144,11 +144,9 @@ angular.module('AppCtrl', ['AppServices'])
     var curUser = $scope.tempUser.id;
     
     UsersAPI.getUser(curUser).then(function(user){
-        console.log("phone number: " + user.data.number)
         $scope.number = user.data.number
     });
     $scope.Admin = function(){
-        console.log($scope.number + " VS 14252238606")
         if (($scope.number == +14252238606) || ($scope.number == +12063840852)){
             return true;
         } else {
@@ -190,10 +188,10 @@ angular.module('AppCtrl', ['AppServices'])
     })
     $scope.sendMsg = function(message, number) {
         Message.sendMessage(message, number).then(function success(res) {
-            console.log("it's working " + res)
+            console.log("Message sent. " + res)
         },
         function error(err){
-            console.log("it's not working" + err)
+            console.log("Message not sent. " + err)
         })
     }
 }])
@@ -207,16 +205,14 @@ angular.module('AppCtrl', ['AppServices'])
     }
   
     UsersAPI.getUser(curUser).then(function(user){
-        console.log("phone number: " + user.data.number)
         $scope.number = user.data.number
     })
     $scope.writeExcuse = function() {
-        console.log('HERE ' + $scope.userExcuse, $scope.number)
         Message.sendMessage($scope.userExcuse, $scope.number).then(function success(res) {
-            console.log("it's working" + res)
+            console.log("Message made! " + res)
         },
         function error(err){
-            console.log("it's not working" + err)
+            console.log("Message not made. " + err)
         })
     }
 
@@ -228,7 +224,7 @@ angular.module('AppCtrl', ['AppServices'])
     $scope.comments = [];
     $scope.allFavorites = [];
     $scope.favorites = [];
-    $scope.favorited = [];
+    $scope.favoritedAlready = [];
 
     $scope.isLoggedIn = function() {
         return Auth.isLoggedIn();
@@ -250,8 +246,6 @@ angular.module('AppCtrl', ['AppServices'])
     CommentsAPI.getAllComments()
     .then(function success(res) {
         $scope.tempcomments = res.data;
-        console.log($scope.excuse._id);
-        // console.log($scope.comments);
          for(var i = 0; i < $scope.tempcomments.length; i++) {
                 if ($scope.tempcomments[i].excuseId == $scope.excuse._id) {
                     $scope.comments.push($scope.tempcomments[i]);
@@ -265,17 +259,22 @@ angular.module('AppCtrl', ['AppServices'])
     FavoritesAPI.getFavorites().then(function success(res){
         $scope.allFavorites = res.data
         for (var i = 0; i < $scope.allFavorites.length; i++){
-            if ($scope.allFavorites[i].userId == $scope.userId){
+            if ($scope.allFavorites[i].userId == $scope.user.id){
                 $scope.favorites.push($scope.allFavorites[i])
             }
         }
+        for (var i = $scope.favorites.length - 1; i >= 0; i--) {
+            if ($scope.favorites[i].excuseId == $scope.excuse._id){
+                $scope.favoritedAlready.push($scope.favorites[i])
+            }
+        }
     }, function error(err){
-        console.log("Boooooo", err)
+        console.log("Failed to get favorites.", err)
     })
 
     $scope.isFavorite = function(){
-        $scope.favorited = $scope.favorites.filter($scope.excuse._id)
-        if ($scope.favorited){
+        console.log($scope.favoritedAlready)
+        if ($scope.favoritedAlready.length > 0){
             return true;
         }
     }
