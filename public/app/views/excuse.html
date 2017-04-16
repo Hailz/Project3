@@ -24,7 +24,7 @@
 		<div ng-show="isLoggedIn()" class="col-xs-4 text-center ">
 			<button ng-click='like()' type="button" class="btn-success excuseDetailbtn">&#10004 Like</button>
 			<button ng-click='addFavorite()' ng-hide='isFavorite()' type="button" class="btn-warning excuseDetailbtn">&#9733 Favorite</button>
-			<button ng-click="deleteFav(excuse._id)" ng-show="isFavorite()" class="btn btn-danger">Unfavorite</button>
+			<button ng-click="deleteFav(excuse._id)" ng-show="isFavorite()" class="btn btn-danger glyphicon glyphicon-thumbs-down">Unfavorite</button>
 			<button ng-click='dislike()' type="button" class="btn-danger excuseDetailbtn">&#10008 Dislike</button>
 		</div>
 	<div class="col-xs-4">
